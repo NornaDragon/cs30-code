@@ -10,6 +10,7 @@ let boxes = [];
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
+  angleMode(DEGREES);
 
   for (let y = 0; y < height; y+= 50){
     for (let x = 0; y < width; x += 50){
