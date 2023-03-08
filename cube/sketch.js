@@ -9,11 +9,11 @@ let boxes = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  angleMode(DEGREES);
+  rectMode(CENTER);
   angleMode(DEGREES);
 
-  for (let y = 0; y < height; y+= 50){
-    for (let x = 0; y < width; x += 50){
+  for (let y = 0; y < height; y+= 50) {
+    for (let x = 0; x < width; x += 50) {
       spawnBox(x, y, 50, random(y*0.25));
     }
   }
