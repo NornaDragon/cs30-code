@@ -8,8 +8,16 @@
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  rectMode(CENTER);
 }
 
 function draw() {
   background(220);
+}
+
+function group(placement, theGround) {
+  let people = {
+    x: placement,
+    y: theGround,
+  };
 }
