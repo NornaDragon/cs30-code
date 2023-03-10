@@ -14,15 +14,37 @@ function setup() {
 
 function draw() {
   background(220);
+  spawnGroup();
+  damage();
 }
 
-function spawnGroup(placement, theGround, health, theHeight, theWidth) {
+function displayShapes() {
+  if (i < 5) {
+    fill(127.5);
+    rect(x, y, 50, 100);
+  }
+}
+
+function damage() {
+  for (let i=0; i<5; i++) {
+    if (group.hp > 0 &&  mouseX > group.x && mouseX < group.x + group.wide && mouseY > group.y && mouseY < group.y + group.tall && mouseIsPressed) {
+      group.hp = group.hp - group.damage;
+    }
+    else {
+      group.hp = 100;
+    }
+  }
+}
+
+
+function spawnGroup() {
   let people = {
-    x: placement,
-    y: theGround,
-    hp: health,
-    tall: theHeight,
-    wide: theWidth,
+    x: random(0, width - 10),
+    y: random(0, height - 10),
+    hp: 100,
+    damage: 1,
+    tall: 40,
+    wide: 20,
   };
-  push.group(people);
+  group.push(people);
 }
