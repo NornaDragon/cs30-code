@@ -21,7 +21,7 @@ function draw() {
 function displayShapes() {
   if (i < 5) {
     fill(127.5);
-    rect(x, y, 50, 100);
+    rect(group.x, group.y, 50, 100);
   }
 }
 
