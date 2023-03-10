@@ -5,6 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+let group = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -15,9 +16,13 @@ function draw() {
   background(220);
 }
 
-function group(placement, theGround) {
+function spawnGroup(placement, theGround, health, theHeight, theWidth) {
   let people = {
     x: placement,
     y: theGround,
+    hp: health,
+    tall: theHeight,
+    wide: theWidth,
   };
+  push.group(people);
 }
