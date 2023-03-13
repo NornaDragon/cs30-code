@@ -9,42 +9,43 @@ let group = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  rectMode(CENTER);
+  spawnGroup();
 }
 
 function draw() {
   background(220);
-  spawnGroup();
+  displayShapes();
   damage();
 }
 
 function displayShapes() {
-  if (i < 5) {
+  if (group[0].enemy != 0){
     fill(127.5);
-    rect(group.x, group.y, 50, 100);
+    rect(group[0].x, group[0].y, group[0].wide, group[0].tall);
   }
 }
 
 function damage() {
-  for (let i=0; i<5; i++) {
-    if (group.hp > 0 &&  mouseX > group.x && mouseX < group.x + group.wide && mouseY > group.y && mouseY < group.y + group.tall && mouseIsPressed) {
-      group.hp = group.hp - group.damage;
-    }
-    else {
-      group.hp = 100;
-    }
+  if (group[0].hp > 0 &&  mouseX > group[0].x && mouseX < group[0].x + group[0].wide && mouseY > group[0].y && mouseY < group[0].y + group[0].tall && mouseIsPressed) {
+      group[0].hp = group[0].hp - group[0].damage;
   }
+  else if (group[0].hp === 0 && group[0].enemy != 0) {
+      group[0].hp = 100;
+      group[0].enemy = group[0].enemy - 1;
+  }
+
 }
 
 
 function spawnGroup() {
   let people = {
-    x: random(0, width - 10),
-    y: random(0, height - 10),
+    x: random(20, width - 20),
+    y: random(20, height - 20),
     hp: 100,
     damage: 1,
-    tall: 40,
-    wide: 20,
+    enemy: 5,
+    tall: 100,
+    wide: 50,
   };
   group.push(people);
 }
