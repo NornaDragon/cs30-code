@@ -1,3 +1,3 @@
 # cs30-code
-all code time
+it's always coding time
 ## beep boop
