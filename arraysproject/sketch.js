@@ -24,7 +24,12 @@ function draw() {
 
 function displayShapes() {
   for (i = 0; i < group.length; i++) {
-    if (group[i].enemy != 0) {
+    isMine = round(random(1))
+    if (isMine === 1){
+      fill(0);
+    circle(group[i].x + 25, group[i].y + 25, group[i].wide)
+    }
+    if (group[i].alive != 0) {
       fill(127.5);
       rect(group[i].x, group[i].y, group[i].wide, group[i].tall);
     }
@@ -35,19 +40,19 @@ function damage() {
   for (i = 0; i < group.length; i++) {
     if (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed) {
       group[i].hp = group[i].hp - group[i].damage;
-    } else if (group[i].hp === 0 && group[i].enemy != 0) {
-      group[i].enemy = group[i].enemy - 1;
+    } else if (group[i].hp === 0 && group[i].alive != 0) {
+      group[i].alive = group[i].alive - 1;
     }
   }
 }
 
-function spawnGroup(theX, theY, theHp, theDamage, theEnemy, theWidth, theHeight) {
+function spawnGroup(theX, theY, theHp, theDamage, isAlive, theWidth, theHeight) {
   let people = {
     x: theX,
     y: theY,
     hp: theHp,
     damage: theDamage,
-    enemy: theEnemy,
+    alive: isAlive,
     wide: theWidth,
     tall: theHeight,
   };
