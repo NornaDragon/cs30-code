@@ -1,4 +1,4 @@
-// Arrays and object notion assignment (art?, genurative art?)
+// Arrays and object notion assignment (minesweper)
 // Maria van der spuy
 // 08/03/2023
 //
@@ -9,7 +9,11 @@ let group = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  spawnGroup();
+  for (let y = 0; y < height; y += 50) {
+    for (let x = 0; x < width; x += 50) {
+      spawnGroup(x, y, 5, 5, 1, 50, 50);
+    }
+  }
 }
 
 function draw() {
@@ -19,33 +23,33 @@ function draw() {
 }
 
 function displayShapes() {
-  if (group[0].enemy != 0){
-    fill(127.5);
-    rect(group[0].x, group[0].y, group[0].wide, group[0].tall);
+  for (i = 0; i < group.length; i++) {
+    if (group[i].enemy != 0) {
+      fill(127.5);
+      rect(group[i].x, group[i].y, group[i].wide, group[i].tall);
+    }
   }
 }
 
 function damage() {
-  if (group[0].hp > 0 &&  mouseX > group[0].x && mouseX < group[0].x + group[0].wide && mouseY > group[0].y && mouseY < group[0].y + group[0].tall && mouseIsPressed) {
-      group[0].hp = group[0].hp - group[0].damage;
+  for (i = 0; i < group.length; i++) {
+    if (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed) {
+      group[i].hp = group[i].hp - group[i].damage;
+    } else if (group[i].hp === 0 && group[i].enemy != 0) {
+      group[i].enemy = group[i].enemy - 1;
+    }
   }
-  else if (group[0].hp === 0 && group[0].enemy != 0) {
-      group[0].hp = 100;
-      group[0].enemy = group[0].enemy - 1;
-  }
-
 }
 
-
-function spawnGroup() {
+function spawnGroup(theX, theY, theHp, theDamage, theEnemy, theWidth, theHeight) {
   let people = {
-    x: random(20, width - 20),
-    y: random(20, height - 20),
-    hp: 100,
-    damage: 1,
-    enemy: 5,
-    tall: 100,
-    wide: 50,
+    x: theX,
+    y: theY,
+    hp: theHp,
+    damage: theDamage,
+    enemy: theEnemy,
+    wide: theWidth,
+    tall: theHeight,
   };
   group.push(people);
 }
