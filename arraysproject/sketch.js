@@ -1,4 +1,4 @@
-// Arrays and object notion assignment (minesweper)
+// Arrays and object notion assignment (minesweeper)
 // Maria van der spuy
 // 08/03/2023
 //
