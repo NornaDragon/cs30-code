@@ -7,12 +7,18 @@
 
 let group = [];
 
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   for (let y = 0; y < height; y += 50) {
     for (let x = 0; x < width; x += 50) {
       spawnGroup(x, y, 5, 5, 1, 50, 50);
+    }
+  }
+  for (let i = 0; i < group.length; i++) {
+    let isMine = round(random(1));
+    if (isMine === 1){
+      fill(0);
+      circle(group[i].x + group[i].wide/2, group[i].y + group[i].wide/2, group[i].wide);
     }
   }
 }
@@ -25,11 +31,11 @@ function draw() {
 
 function displayShapes() {
   for (let i = 0; i < group.length; i++) {
-    let isMine = round(random(1));
-    if (isMine === 1){
-      fill(0);
-      circle(group[i].x + 25, group[i].y + 25, group[i].wide);
-    }
+    // let isMine = round(random(1));
+    // if (isMine === 1){
+    //   fill(0);
+    //   circle(group[i].x + 25, group[i].y + 25, group[i].wide);
+    // }
     if (group[i].alive !== 0) {
       fill(127.5);
       rect(group[i].x, group[i].y, group[i].wide, group[i].tall);
@@ -48,7 +54,7 @@ function damage() {
   }
 }
 
-function spawnGroup(theX, theY, theHp, theDamage, isAlive, theWidth, theHeight) {
+function spawnGroup(theX, theY, theHp, theDamage, isAlive, theWidth, theHeight, isMine) {
   let people = {
     x: theX,
     y: theY,
@@ -57,6 +63,7 @@ function spawnGroup(theX, theY, theHp, theDamage, isAlive, theWidth, theHeight) 
     alive: isAlive,
     wide: theWidth,
     tall: theHeight,
+    mine: isMine,
   };
   group.push(people);
 }
