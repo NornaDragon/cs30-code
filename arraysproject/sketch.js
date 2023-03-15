@@ -10,8 +10,8 @@ let group = [];
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  for (let y = 0; y < height; y += 50) {
-    for (let x = 0; x < width; x += 50) {
+  for (let x = 0; x < width; x += 50) {
+    for (let y = 0; y < height; y += 50) {
       spawnGroup(x, y, 5, 5, 1, 50, 50);
     }
   }
@@ -27,17 +27,16 @@ function draw() {
 function Havelost() {
   for (let i = 0; i < group.length; i++){
     if (group[i].mine && group[i].hp === 0) {
-    fill(255);
-    textSize(width / 10);
-    textAlign(CENTER, CENTER);
-    text("You Lose...", width / 2, height / 2);
+      fill(255);
+      textSize(width / 10);
+      textAlign(CENTER, CENTER);
+      text("You Lose...", width / 2, height / 2);
     }
   }
 }
 
 function displayShapes() {
   for (let i = 0; i < group.length; i++) {
-
     if (group[i].mine){
       fill(0);
       circle(group[i].x + 25, group[i].y + 25, group[i].wide);
@@ -48,40 +47,45 @@ function displayShapes() {
       rect(group[i].x, group[i].y, group[i].wide, group[i].tall);
     }
 
+    if (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed && mouseButton === RIGHT) {
+      fill(255,0,0);
+      triangle(group[i].x + 10, group[i].y + 10, group[i].x + 40, group[i].y + 25, group[i].x + 10, group[i].y + 40);
+    }
+
     if (!group[i].mine) {
       textSize(group[i].wide);
       textAlign(CENTER, CENTER);
 
       fill(0,0,255);
-      text("1", group[i].x + 25, group[i].y + 25)
+      text("1", group[i].x + 25, group[i].y + 25);
 
       fill(0,130,0);
-      text("2", group[i].x + 25, group[i].y + 25)
+      text("2", group[i].x + 25, group[i].y + 25);
 
       fill(255,0,0);
-      text("3", group[i].x + 25, group[i].y + 25)
+      text("3", group[i].x + 25, group[i].y + 25);
 
       fill(0,0,132);
-      text("4", group[i].x + 25, group[i].y + 25)
+      text("4", group[i].x + 25, group[i].y + 25);
 
       fill(132,0,0);
-      text("5", group[i].x + 25, group[i].y + 25)
+      text("5", group[i].x + 25, group[i].y + 25);
 
       fill(0,130,132);
-      text("6", group[i].x + 25, group[i].y + 25)
+      text("6", group[i].x + 25, group[i].y + 25);
 
       fill(132,0,132);
-      text("7", group[i].x + 25, group[i].y + 25)
+      text("7", group[i].x + 25, group[i].y + 25);
 
       fill(117);
-      text("8", group[i].x + 25, group[i].y + 25)
+      text("8", group[i].x + 25, group[i].y + 25);
     }
   }
 }
 
 function damage() {
   for (let i = 0; i < group.length; i++) {
-    if (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed) {
+    if (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed && mouseButton === LEFT) {
       group[i].hp = group[i].hp - group[i].damage;
     }
     
