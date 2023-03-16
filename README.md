@@ -7,6 +7,3 @@ it's always coding time
 - mines 100%
 - flags 90%
 - numbers 10%
-
-### minesweeper ideas
-- numbers from total circle arould it in a certain radius, print number in colour
