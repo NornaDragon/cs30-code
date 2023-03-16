@@ -1,6 +1,12 @@
 # cs30-code
 it's always coding time
-## minesweeper ideas
-- blocks cover everything underneth
-- circle has mines, random in the areas where squares are
+
+## Minesweeper
+### Done
+- cover blocks 100%
+- mines 100%
+- flags 90%
+- numbers 10%
+
+### minesweeper ideas
 - numbers from total circle arould it in a certain radius, print number in colour
