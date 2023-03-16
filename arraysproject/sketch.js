@@ -130,7 +130,6 @@ function Nums() {
       }      
     }
   }
-  
 }
 
 function damage() {
