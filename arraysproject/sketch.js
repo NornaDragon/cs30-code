@@ -22,7 +22,7 @@ function draw() {
   background(185);
   damage();
   displayShapes();
-  Nums();
+  // Nums();
   Havelost();
 }
 
@@ -63,33 +63,46 @@ function displayShapes() {
   }
 }
 
-// wip
+// wip (not in use)
 function Nums() {
   for (let i = 0; i < group.length; i++) {
-    for (let x = -50; x < width; x += 50) {
-      if (group[i].mine) {
-        group[i].minesSurrounding = group[i].minesSurrounding + 1;
+    for (let x = 0; x < width; x += 50) {
+      for (let y = 0; y < height; y += 50) {
+        if (group[i-1].mine) {
+          group[i].minesSurrounding = group[i].minesSurrounding + 1;
+        }
+
+        if (group[i+1].mine) {
+          group[i].minesSurrounding = group[i].minesSurrounding + 1;
+        }
+
+        if (group[i - group[i].y].mine) {
+          group[i].minesSurrounding = group[i].minesSurrounding + 1;
+        }
+
+        if (group[i - group[i].y - 1].mine) {
+          group[i].minesSurrounding = group[i].minesSurrounding + 1;
+        }
+
+        if (group[i - group[i].y + 1].mine) {
+          group[i].minesSurrounding = group[i].minesSurrounding + 1;
+        }
+
+        if (group[i + group[i].y].mine) {
+          group[i].minesSurrounding = group[i].minesSurrounding + 1;
+        }
+
+        if (group[i + group[i].y - 1].mine) {
+          group[i].minesSurrounding = group[i].minesSurrounding + 1;
+        }
+
+        if (group[i + group[i].y + 1].mine) {
+          group[i].minesSurrounding = group[i].minesSurrounding + 1;
+        }
       }
     }
 
-    for (let x = 50; x < width; x += 50) {
-      if (group[i].mine) {
-        group[i].minesSurrounding = group[i].minesSurrounding + 1;
-      }
-    }
-
-    for (let y = -50; y < width; y += 50) {
-      if (group[i].mine) {
-        group[i].minesSurrounding = group[i].minesSurrounding + 1;
-      }
-    }
-
-    for (let y = 50; y < width; y += 50) {
-      if (group[i].mine) {
-        group[i].minesSurrounding = group[i].minesSurrounding + 1;
-      }
-    }
-
+    
     if (!group[i].mine) {
       textSize(group[i].wide);
       textAlign(CENTER, CENTER);
