@@ -22,7 +22,7 @@ function draw() {
   background(185);
   damage();
   displayShapes();
-  Nums();
+  // Nums();
   Havelost();
 }
 
@@ -69,35 +69,35 @@ function Nums() {
     for (let x = 0; x < width; x += 50) {
       for (let y = 0; y < height; y += 50) {
         if (!group[i].mine) {
-          if (group[i-1].mine) {
+          if (group[((group[i].y * group[i].thecolm + group[i].x) - 1)].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[i+1].mine) {
+          if (group[((group[i].y * group[i].thecolm + group[i].x) + 1)].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[i - group[i].y].mine) {
+          if (group[(group[i].y * (group[i].thecolm - 1) + group[i].x)].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[i - group[i].y - 1].mine) {
+          if (group[(group[i].y * (group[i].thecolm - 1) + group[i].x) - 1].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[i - group[i].y + 1].mine) {
+          if (group[(group[i].y * (group[i].thecolm - 1) + group[i].x) + 1].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[i + group[i].y].mine) {
+          if (group[(group[i].y * (group[i].thecolm + 1) + group[i].x)].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[i + group[i].y - 1].mine) {
+          if (group[(group[i].y * (group[i].thecolm + 1) + group[i].x) - 1].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[i + group[i].y + 1].mine) {
+          if (group[(group[i].y * (group[i].thecolm + 1) + group[i].x) + 1].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
         } 
@@ -180,11 +180,10 @@ function spawnGroup(theX, theY, theHp, theDamage, isdisplayed, theWidth, theHeig
     lost: false,
     minesSurrounding: 0,
     flag: false,
-    numOfRow: 2,
-    therow: 2,
-    numOfColms: 2,
-    thecolm: 2,
-
+    numOfColms: width/50 + 1,
+    thecolm: theX/50,
+    numOfRow: height/50 + 1,
+    therow: theY/50,
   };
   group.push(people);
 }
