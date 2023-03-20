@@ -54,7 +54,7 @@ function displayShapes() {
     
     //place and removing flags with right click
     if (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed && mouseButton === RIGHT) {
-      group[i].flag = !group[i].flag
+      group[i].flag = !group[i].flag;
     }
     // displaying flags
     if (group[i].flag === true && group[i].hp > 0) {
@@ -69,15 +69,15 @@ function Nums() {
   for (let i = 0; i < group.length; i++) {
     for (let x = 0; x < width; x += 50) {
       for (let y = 0; y < height; y += 50) {
-        numOfColms = round(width/50)
-        thecolm = round(group[i].x/50 - 1)
-        numOfRow = round(height/50)
-        therow = round(group[i].y/50 - 1)
+        group[i].numOfColms = round(width/50);
+        group[i].thecolm = round(group[i].x/50 - 1);
+        group[i].numOfRow = round(height/50);
+        group[i].therow = round(group[i].y/50 - 1);
 
         // checking if there is a mine around a non-mine square, and if there is adding a point on the minesSurrounding
         // only brings 0 or really high num
         if (!group[i].mine) {
-          if (group[int(((group[i].therow * group[i].numOfColms + group[i].thecolm) - 1))].mine === true || group[int(((group[i].therow * group[i].numOfColms + group[i].thecolm) + 1))].mine === true || group[int((group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm))].mine === true || group[int((group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm) - 1)].mine === true || group[int((group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm) + 1)].mine === true || group[int((group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm))].mine === true || group[int((group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm) - 1)].mine === true || group[int((group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm) + 1)].mine  === true) {
+          if (group[int(group[i].therow * group[i].numOfColms + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * group[i].numOfColms + group[i].thecolm + 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm + 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm + 1)].mine  === true) {
             group[i].minesSurrounding++;
           }
         }
