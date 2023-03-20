@@ -22,7 +22,7 @@ function draw() {
   background(185);
   damage();
   displayShapes();
-  // Nums();
+  Nums();
   Havelost();
 }
 
@@ -73,31 +73,31 @@ function Nums() {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[((group[i].y * group[i].thecolm + group[i].x) + 1)].mine) {
+          if (group[((group[i].therow * group[i].thecolm + group[i].x) + 1)].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].y * (group[i].thecolm - 1) + group[i].x)].mine) {
+          if (group[(group[i].therow * (group[i].thecolm - 1) + group[i].x)].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].y * (group[i].thecolm - 1) + group[i].x) - 1].mine) {
+          if (group[(group[i].therow * (group[i].thecolm - 1) + group[i].x) - 1].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].y * (group[i].thecolm - 1) + group[i].x) + 1].mine) {
+          if (group[(group[i].therow * (group[i].thecolm - 1) + group[i].x) + 1].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].y * (group[i].thecolm + 1) + group[i].x)].mine) {
+          if (group[(group[i].therow * (group[i].thecolm + 1) + group[i].x)].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].y * (group[i].thecolm + 1) + group[i].x) - 1].mine) {
+          if (group[(group[i].therow * (group[i].thecolm + 1) + group[i].x) - 1].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].y * (group[i].thecolm + 1) + group[i].x) + 1].mine) {
+          if (group[(group[i].therow * (group[i].thecolm + 1) + group[i].x) + 1].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
         } 
@@ -180,10 +180,13 @@ function spawnGroup(theX, theY, theHp, theDamage, isdisplayed, theWidth, theHeig
     lost: false,
     minesSurrounding: 0,
     flag: false,
-    numOfColms: width/50 + 1,
-    thecolm: theX/50,
-    numOfRow: height/50 + 1,
-    therow: theY/50,
+
+
+    //rework!
+    numOfColms: round(width/50 + 1),
+    thecolm: round(theX/50),
+    numOfRow: round(height/50 + 1),
+    therow: round(theY/50),
   };
   group.push(people);
 }
