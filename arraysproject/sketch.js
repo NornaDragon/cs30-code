@@ -53,7 +53,10 @@ function displayShapes() {
     }
     
     //place and removing flags with right click
-    if (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed && mouseButton === RIGHT) {
+    if (!group[i].flag && (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed && mouseButton === RIGHT)) {
+      group[i].flag = !group[i].flag;
+    }
+    else if (group[i].flag && (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed && mouseButton === RIGHT)) {
       group[i].flag = !group[i].flag;
     }
     // displaying flags
@@ -74,13 +77,15 @@ function Nums() {
         group[i].numOfRow = round(height/50);
         group[i].therow = round(group[i].y/50 - 1);
 
+        console.log(group[group[i].numOfColms + group[i].thecolm - 1].mine);
+
         // checking if there is a mine around a non-mine square, and if there is adding a point on the minesSurrounding
         // only brings 0 or really high num
-        if (!group[i].mine) {
-          if (group[int(group[i].therow * group[i].numOfColms + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * group[i].numOfColms + group[i].thecolm + 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm + 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm + 1)].mine  === true) {
-            group[i].minesSurrounding++;
-          }
-        }
+        // if (!group[i].mine) {
+        //   if (group[int(group[i].therow * group[i].numOfColms + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * group[i].numOfColms + group[i].thecolm + 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm + 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm + 1)].mine  === true) {
+        //     group[i].minesSurrounding++;
+        //   }
+        // }
         // checking minesSurrounding for a num and puting the corresponding num
         if (!group[i].mine) {
           textSize(group[i].wide);
