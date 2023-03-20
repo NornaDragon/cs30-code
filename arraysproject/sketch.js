@@ -52,8 +52,8 @@ function displayShapes() {
     }
     
     //half works flag can't go away
-    if (group[i].flag === false && group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed && mouseButton === RIGHT) {
-      group[i].flag = true;
+    if (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed && mouseButton === RIGHT) {
+      group[i].flag = !group[i].flag
     }
 
     if (group[i].flag === true && group[i].hp > 0) {
@@ -69,35 +69,35 @@ function Nums() {
     for (let x = 0; x < width; x += 50) {
       for (let y = 0; y < height; y += 50) {
         if (!group[i].mine) {
-          if (group[((group[i].y * group[i].thecolm + group[i].x) - 1)].mine) {
+          if (group[int(((group[i].y * group[i].thecolm + group[i].x) - 1))].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[((group[i].therow * group[i].thecolm + group[i].x) + 1)].mine) {
+          if (group[int(((group[i].therow * group[i].thecolm + group[i].x) + 1))].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].therow * (group[i].thecolm - 1) + group[i].x)].mine) {
+          if (group[int((group[i].therow * (group[i].thecolm - 1) + group[i].x))].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].therow * (group[i].thecolm - 1) + group[i].x) - 1].mine) {
+          if (group[int((group[i].therow * (group[i].thecolm - 1) + group[i].x) - 1)].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].therow * (group[i].thecolm - 1) + group[i].x) + 1].mine) {
+          if (group[int((group[i].therow * (group[i].thecolm - 1) + group[i].x) + 1)].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].therow * (group[i].thecolm + 1) + group[i].x)].mine) {
+          if (group[int((group[i].therow * (group[i].thecolm + 1) + group[i].x))].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].therow * (group[i].thecolm + 1) + group[i].x) - 1].mine) {
+          if (group[int((group[i].therow * (group[i].thecolm + 1) + group[i].x) - 1)].mine) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
   
-          if (group[(group[i].therow * (group[i].thecolm + 1) + group[i].x) + 1].mine) {
+          if (int(group[(group[i].therow * (group[i].thecolm + 1) + group[i].x) + 1].mine)) {
             group[i].minesSurrounding = group[i].minesSurrounding + 1;
           }
         } 
