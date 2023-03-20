@@ -26,6 +26,7 @@ function draw() {
   Havelost();
 }
 
+//lose popup
 function Havelost() {
   for (let i = 0; i < group.length; i++){
     if (group[i].mine && group[i].hp === 0) {
@@ -55,7 +56,7 @@ function displayShapes() {
     if (group[i].hp > 0 && mouseX > group[i].x && mouseX < group[i].x + group[i].wide && mouseY > group[i].y && mouseY < group[i].y + group[i].tall && mouseIsPressed && mouseButton === RIGHT) {
       group[i].flag = !group[i].flag
     }
-
+    // displaying flags
     if (group[i].flag === true && group[i].hp > 0) {
       fill(255,0,0);
       triangle(group[i].x + 10, group[i].y + 10, group[i].x + 40, group[i].y + 25, group[i].x + 10, group[i].y + 40);
@@ -74,22 +75,22 @@ function Nums() {
         therow = round(group[i].y/50 - 1)
 
         // checking if there is a mine around a non-mine square, and if there is adding a point on the minesSurrounding
-        // only brings 0
+        // only brings 0 or really high num
         if (!group[i].mine) {
-          if (group[i].minesSurrounding > 8 && group[int(((group[i].therow * group[i].numOfColms + group[i].thecolm) - 1))].mine === true || group[int(((group[i].therow * group[i].numOfColms + group[i].thecolm) + 1))].mine === true || group[int((group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm))].mine === true || group[int((group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm) - 1)].mine === true || group[int((group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm) + 1)].mine === true || group[int((group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm))].mine === true || group[int((group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm) - 1)].mine === true || group[int((group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm) + 1)].mine  === true) {
-            group[i].minesSurrounding = group[i].minesSurrounding + 1;
+          if (group[int(((group[i].therow * group[i].numOfColms + group[i].thecolm) - 1))].mine === true || group[int(((group[i].therow * group[i].numOfColms + group[i].thecolm) + 1))].mine === true || group[int((group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm))].mine === true || group[int((group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm) - 1)].mine === true || group[int((group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm) + 1)].mine === true || group[int((group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm))].mine === true || group[int((group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm) - 1)].mine === true || group[int((group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm) + 1)].mine  === true) {
+            group[i].minesSurrounding++;
           }
         }
         // checking minesSurrounding for a num and puting the corresponding num
         if (!group[i].mine) {
           textSize(group[i].wide);
           textAlign(CENTER, CENTER);
-
-          // if (group[i].minesSurrounding === 0) {
-          //   fill(0);
-          //   text(":(", group[i].x + 25, group[i].y + 25);
-          // }
-
+          //check that it at least sort of works
+          if (group[i].minesSurrounding === 0) {
+            fill(0);
+            text(":(", group[i].x + 25, group[i].y + 25);
+          }
+          //the nums
           if (group[i].minesSurrounding === 1) {
             fill(0,0,255);
             text("1", group[i].x + 25, group[i].y + 25);
@@ -158,7 +159,6 @@ function spawnGroup(theX, theY, theHp, theDamage, isdisplayed, theWidth, theHeig
     wide: theWidth,
     tall: theHeight,
     mine: random(1) > 0.7,
-    lost: false,
     minesSurrounding: 0,
     flag: false,
     numOfColms: allColm,
