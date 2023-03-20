@@ -12,8 +12,8 @@
 
 let grid;
 
-const ROWS = 100;
-const COLS = 100;
+const ROWS = 10;
+const COLS = 10;
 let cellSize;
 
 function setup() {
