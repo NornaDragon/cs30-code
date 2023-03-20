@@ -11,7 +11,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   spawnBubble();
   noStroke();
-  window.setInterval(spawnBubble, 1);
+  window.setInterval(spawnBubble, 500);
 }
 
 
