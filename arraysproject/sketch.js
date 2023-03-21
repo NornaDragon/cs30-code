@@ -22,11 +22,11 @@ function draw() {
   background(185);
   damage();
   displayShapes();
-  Nums();
+  // Nums();
   Havelost();
 }
 
-//lose popup
+//when the block on top of a mine the lose popup activates
 function Havelost() {
   for (let i = 0; i < group.length; i++){
     if (group[i].mine && group[i].hp === 0) {
@@ -67,25 +67,30 @@ function displayShapes() {
   }
 }
 
-// wip (not in use)
+//(not in use), slows the program down to much for not really doing anything
 function Nums() {
   for (let i = 0; i < group.length; i++) {
     for (let x = 0; x < width; x += 50) {
       for (let y = 0; y < height; y += 50) {
+        
         group[i].numOfColms = round(width/50);
         group[i].thecolm = round(group[i].x/50 - 1);
         group[i].numOfRow = round(height/50);
         group[i].therow = round(group[i].y/50 - 1);
 
-        console.log(group[group[i].numOfColms + group[i].thecolm - 1].mine);
+        // tryed to diagnose the problem ran out of time
+
+        // console.log(group[group[i].numOfColms + group[i].thecolm - 1].mine);
 
         // checking if there is a mine around a non-mine square, and if there is adding a point on the minesSurrounding
         // only brings 0 or really high num
+
         // if (!group[i].mine) {
         //   if (group[int(group[i].therow * group[i].numOfColms + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * group[i].numOfColms + group[i].thecolm + 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms - 1) + group[i].thecolm + 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm - 1)].mine === true || group[int(group[i].therow * (group[i].numOfColms + 1) + group[i].thecolm + 1)].mine  === true) {
         //     group[i].minesSurrounding++;
         //   }
         // }
+
         // checking minesSurrounding for a num and puting the corresponding num
         if (!group[i].mine) {
           textSize(group[i].wide);
