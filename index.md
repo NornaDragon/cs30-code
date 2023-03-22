@@ -19,4 +19,4 @@
 - [Orange and Blue Colour Change Game](colour-game)
 
 ## Projects
-- [Arrays and Object Notation Project](arraysproject)
+- [Arrays and Object Notation Project (Minesweeper)](arraysproject)
