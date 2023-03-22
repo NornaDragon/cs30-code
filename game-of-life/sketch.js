@@ -1,9 +1,6 @@
-// Project Title
 // colour game
+// Maria
 // 21/03/2023
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
 
 const ROWS = 10;
 const COLS = 10;
@@ -14,6 +11,8 @@ let autoUpdate = true;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   grid = createRandom2dArray(ROWS, COLS);
+  
+  
   if(width < height) {
     cellSize = width/COLS;
   }
@@ -22,9 +21,35 @@ function setup() {
   }
 }
 
+
 function draw() {
   background(220);
+  if (autoUpdate && frameCount % 10 === 0) {
+    grid = updateGrid();
+  }
   displayGrid(grid);
+}
+
+function keyTyped() {
+  if (key === "r") {
+    grid = createRandom2dArray(ROWS, COLS);
+  }
+  else if (key === "e") {
+    grid = createEmpty2dArray(ROWS, COLS);
+  }
+  else if (key === " ") {
+    grid = updateGrid();
+  }
+  else if (key === "a") {
+    autoUpdate = !autoUpdate;
+  }
+}
+
+function mousePressed() {
+  let x = Math.floor(mouseX/cellSize);
+  let y = Math.floor(mouseY/cellSize);
+
+  toggleCell(x, y);
 }
 
 function updateGrid() {
@@ -64,25 +89,6 @@ function updateGrid() {
     }
   }
   return nextTurn;
-}
-
-function keyTyped() {
-  if (key === "r") {
-    grid = createRandom2dArray(ROWS, COLS);
-  }
-  else if (key === "e") {
-    grid = createEmpty2dArray(ROWS, COLS);
-  }
-  else if (key === " ") {
-    grid = updateGrid();
-  }
-}
-
-function mousePressed() {
-  let x = Math.floor(mouseX/cellSize);
-  let y = Math.floor(mouseY/cellSize);
-
-  toggleCell(x, y);
 }
 
 function toggleCell(x, y) {
