@@ -1,7 +1,7 @@
 # CS 30 Maria
 
 
-##Demos
+## Demos
 - [firstgo](firstgo)
 - [bousing](bousing)
 - [cube](cube)
