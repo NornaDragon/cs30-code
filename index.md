@@ -16,6 +16,7 @@
 ### 2D Arrays
 - [Black and White Grid](2d-Grid)
 - [Orange and Blue Colour Change Game](colour-game)
+- [Game of Life](game-of-life)
 
 ## Projects
 - [Arrays and Object Notation Project (Minesweeper)](arraysproject)
