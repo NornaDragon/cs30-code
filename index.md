@@ -20,3 +20,4 @@
 
 ## Projects
 - [Arrays and Object Notation Project (Minesweeper)](arraysproject)
+- [2D Array Project](2d-array-project)
