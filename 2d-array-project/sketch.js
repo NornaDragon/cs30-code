@@ -15,6 +15,8 @@
 // more frendly and monster verients
 // customization
 
+// look at dist, map, and offset in exaples and on web
+
 
 const ROWS = 5;
 const COLS = 15;
