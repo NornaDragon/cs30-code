@@ -1,14 +1,26 @@
-// Project Title
-// Your Name
-// Date
+// The Monster Dungeon
+// Maria C. van der Spuy
+// 23/03/2023
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
+
+
+// get a good way to import my animation (guard, angi, fire, grem)
+// make and get tiles
+// create damage and attack systems (menu system?)
+
+// if i can get all that
+// equipable items
+// more frendly and monster verients
+// customization
+
 
 const ROWS = 5;
 const COLS = 15;
 let grid;
 let cellSize;
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
