@@ -2,11 +2,16 @@
 // Maria
 // 21/03/2023
 
-const ROWS = 10;
-const COLS = 10;
+const ROWS = 40;
+const COLS = 40;
 let grid;
 let cellSize;
 let autoUpdate = true;
+let gosperGun;
+
+function preload() {
+  gosperGun = loadJSON("gosper.json");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -42,6 +47,10 @@ function keyTyped() {
   }
   else if (key === "a") {
     autoUpdate = !autoUpdate;
+  }
+  else if (key === "g") {
+    //needs to be 40x40 grid
+    grid = gosperGun;
   }
 }
 
