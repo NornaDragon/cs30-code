@@ -21,6 +21,15 @@ const COLS = 15;
 let grid;
 let cellSize;
 
+let doorUp;
+let doorDown;
+let brick;
+
+let guard;
+let torch;
+let angi;
+let grem;
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
