@@ -15,7 +15,9 @@
 // more frendly and monster verients
 // customization
 
-// look at dist, map, and offset in exaples and on web
+// dist(x1, y1, x2, y2)
+// map(value, start1, stop1, start2, stop2, [withinBounds])
+// offset 
 
 
 const ROWS = 5;
