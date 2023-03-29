@@ -23,7 +23,7 @@
 
 let tiles;
 let levelBackground;
-let brick, pathway, dirt, empty;
+let brick, pathway, dirt, empty, owen;
 let tilesHigh, tilesWide;
 let tileWidth, tileHeight;
 let levelToLoad;
@@ -31,7 +31,7 @@ let lines;
 
 function preload() {
   //load level data
-  levelToLoad = "assets/levels/0.txt";
+  levelToLoad = "assets/levels/3.txt";
   lines = loadStrings(levelToLoad);
 
   //load background
@@ -40,13 +40,17 @@ function preload() {
   //load tile images
   brick = loadImage("assets/image_and_animation/brick.png");
   dirt = loadImage("assets/image_and_animation/dirt.png");
-  pathway = loadImage("assets/image_and_animation/pathway.png");
+  pathwayTopLeft = loadImage("assets/image_and_animation/pathway/pathway_0.png");
+  pathwayTopRight = loadImage("assets/image_and_animation/pathway/pathway_1.png");
+  pathwayBottomLeft = loadImage("assets/image_and_animation/pathway/pathway_2.png");
+  pathwayBottomRight = loadImage("assets/image_and_animation/pathway/pathway_3.png");
   empty = loadImage("assets/image_and_animation/empty.png");
+  owen = loadImage("assets/image_and_animation/Graphiti.png");
 }
 
 function setup() {
-  // keep this a 4:3 ratio, or it will stretch in weird ways
-  createCanvas(200, 80);
+  // keep 5:1 ratio
+  createCanvas(1500, 300);
 
   tilesHigh = lines.length;
   tilesWide = lines[0].length;
@@ -87,7 +91,19 @@ function showTile(location, x, y) {
     image(brick, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
   }
   else if (location === "P") {
-    image(pathway, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+    image(pathwayTopLeft, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "A") {
+    image(pathwayTopRight, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "T") {
+    image(pathwayBottomLeft, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "H") {
+    image(pathwayBottomRight, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "O") {
+    image(owen, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
   }
   else {
     image(empty, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
