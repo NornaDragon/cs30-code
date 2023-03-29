@@ -32,7 +32,9 @@ let tilesHigh, tilesWide;
 let tileWidth, tileHeight;
 let levelToLoad;
 let lines;
+
 let herostill = true;
+let isUp = true;
 
 function preload() {
   //load level data
@@ -100,8 +102,16 @@ function display() {
 }
 
 function heroTravel() {
+
+
   if (herostill) {
-    image(heroIdleUp, x, height - height/2, tileWidth, tileHeight);
+    if (isUp && frameCount % 10 === 0){
+      image(heroIdleUp, x, height - height/2, tileWidth, tileHeight);
+      isUp = !isUp
+    }
+    else if (!isUp) {
+      image(heroIdleUp, x, height - height/2, tileWidth, tileHeight);
+    }
   }
   // if (!herostill) {
   //   image(heroIdleUp, x, height - (height/2), tileWidth, tileHeight);
