@@ -19,16 +19,20 @@
 // map(value, start1, stop1, start2, stop2, [withinBounds])
 // offset 
 
-
+//starting point
+let x = 0;
 
 let tiles;
 let levelBackground;
 let brick, dirt, empty, owen;
 let pathwayTopLeft, pathwayTopRight, pathwayBottomLeft, pathwayBottomRight;
+let pathwayLeft, pathwayRight;
+let heroIdleUp, heroIdleDown;
 let tilesHigh, tilesWide;
 let tileWidth, tileHeight;
 let levelToLoad;
 let lines;
+let herostill = true;
 
 function preload() {
   //load level data
@@ -41,12 +45,22 @@ function preload() {
   //load tile images
   brick = loadImage("assets/image_and_animation/brick.png");
   dirt = loadImage("assets/image_and_animation/dirt.png");
+  owen = loadImage("assets/image_and_animation/brick_Owen.png");
+
+  pathwayLeft = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_0.png");
+  pathwayRight = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_1.png");
+
   pathwayTopLeft = loadImage("assets/image_and_animation/pathway/pathway_0.png");
   pathwayTopRight = loadImage("assets/image_and_animation/pathway/pathway_1.png");
   pathwayBottomLeft = loadImage("assets/image_and_animation/pathway/pathway_2.png");
   pathwayBottomRight = loadImage("assets/image_and_animation/pathway/pathway_3.png");
+
   empty = loadImage("assets/image_and_animation/empty.png");
-  owen = loadImage("assets/image_and_animation/Graphiti.png");
+
+  //hero animations
+  heroIdleUp = loadImage("assets/image_and_animation/guard_idle/pixil-frame-0.png");
+  heroIdleDown = loadImage("assets/image_and_animation/guard_idle/pixil-frame-1.png");
+  
 }
 
 function setup() {
@@ -72,6 +86,7 @@ function setup() {
 
 function draw() {
   display();
+  heroTravel();
 }
 
 function display() {
@@ -82,6 +97,22 @@ function display() {
       showTile(tiles[y][x], x, y);
     }
   }
+}
+
+function heroTravel() {
+  if (herostill) {
+    image(heroIdleUp, x, height - height/2, tileWidth, tileHeight);
+  }
+  // if (!herostill) {
+  //   image(heroIdleUp, x, height - (height/2), tileWidth, tileHeight);
+  // }
+  if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) { //d
+    x += 5;
+  }
+  if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) { //a
+    x -= 5;
+  }
+
 }
 
 function showTile(location, x, y) {
@@ -102,6 +133,12 @@ function showTile(location, x, y) {
   }
   else if (location === "H") {
     image(pathwayBottomRight, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "t") {
+    image(pathwayLeft, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "h") {
+    image(pathwayRight, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
   }
   else if (location === "O") {
     image(owen, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
