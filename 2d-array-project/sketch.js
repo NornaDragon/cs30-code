@@ -12,6 +12,7 @@
 
 let x = 0
 let guardAnimation = [];
+let guardWalkAnimation = [];
 
 let tiles;
 let levelBackground;
@@ -35,8 +36,8 @@ function preload() {
   levelBackground = loadImage("assets/image_and_animation/aroace_background.png");
 
   //load tile images
-  brick = loadImage("assets/image_and_animation/brick.png");
-  dirt = loadImage("assets/image_and_animation/dirt.png");
+  brick = loadImage("assets/image_and_animation/brick_v2.png");
+  dirt = loadImage("assets/image_and_animation/dirt_v2.png");
   owen = loadImage("assets/image_and_animation/brick_Owen.png");
 
   pathwayLeft = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_0.png");
@@ -52,18 +53,27 @@ function preload() {
   //hero animations
   heroIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
   heroIdleData = loadJSON("assets/image_and_animation/guard_idle.json");
+  heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet_v2.png")
+  heroWalkData = loadJSON("assets/image_and_animation/guard_walk.json")
   
 }
 
 function setup() {
   // keep 5:1 ratio
-  createCanvas(1500, 300);
-
+  createCanvas(1200, 240);
+  //240
   let guardFrames = heroIdleData.frames
   for (i = 0; i < guardFrames.length; i++) {
     let pos = guardFrames[i].position;
     let img = heroIdleImage.get(pos.x, pos.y, pos.w, pos.h);
     guardAnimation.push(img);
+  }
+
+  let guardWalkFrames = heroWalkData.frames
+  for (i = 0; i < guardWalkFrames.length; i++) {
+    let pos = guardWalkFrames[i].position;
+    let img = heroWalkImage.get(pos.x, pos.y, pos.w, pos.h);
+    guardWalkAnimation.push(img);
   }
 
   tilesHigh = lines.length;
@@ -84,9 +94,8 @@ function setup() {
 }
 
 function draw() {
-  // display();
-  image(guardAnimation[frameCount % guardAnimation.length], x, 0);
-  // heroTravel();
+  display();
+  heroTravel();
 }
 
 function display() {
@@ -101,18 +110,24 @@ function display() {
 
 function heroTravel() {
   if (herostill) {
-    
+    image(guardAnimation[frameCount % guardAnimation.length], x, 120);
   }
-  // if (!herostill) {
-  //   image(heroIdleUp, x, height - (height/2), tileWidth, tileHeight);
-  // }
+
+  if (!herostill){
+    image(guardWalkAnimation[frameCount % guardAnimation.length], x, 120);
+  }
+
   if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) { //d
     x += 5;
+    herostill = false;
+  }
+  else {
+    herostill = true
   }
   if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) { //a
     x -= 5;
+    herostill = false;
   }
-
 }
 
 function showTile(location, x, y) {
