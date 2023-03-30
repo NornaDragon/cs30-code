@@ -113,8 +113,14 @@ function display() {
 // find P,A,T,H,t,h in the array
 //if guard is within the PATH and presses up or w to goes to next room
 //if guard is within the th and presses down or s, goes to next room
-function roomChange(){
+function roomChange() {
+  // for (let y = 0; y < tilesHigh; y++) {
+  //   for (let x = 0; x < tilesWide; x++) {
+  //     if (tiles[y][x] === 'P', 'A', 'T', 'H' && tiles[y][x]){
 
+  //     }
+  //   }
+  // }
 }
 
 function heroTravel() {
