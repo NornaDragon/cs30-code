@@ -17,7 +17,8 @@
 - [Black and White Grid](2d-Grid)
 - [Orange and Blue Colour Change Game](colour-game)
 - [Game of Life](game-of-life)
+- [Sudoku](sudoku)
 
 ## Projects
 - [Arrays and Object Notation Project (Minesweeper)](arraysproject)
-- [2D Array Project](2d-array-project)
+- [2D Array Project (The Monster Dungeon)](2d-array-project)
