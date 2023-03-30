@@ -56,8 +56,6 @@ function preload() {
   heroIdleData = loadJSON("assets/image_and_animation/guard_idle.json");
   heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet.png")
   heroWalkData = loadJSON("assets/image_and_animation/guard_walk.json")
-  heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet_v2.png");
-  heroWalkData = loadJSON("assets/image_and_animation/guard_walk.json");
   
 }
 
