@@ -11,6 +11,7 @@
 // the animation works just have to fing how to display it right
 
 let x = 0;
+let y = 123;
 let guardAnimation = [];
 let guardWalkAnimation = [];
 
@@ -53,7 +54,7 @@ function preload() {
   //hero animations
   heroIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
   heroIdleData = loadJSON("assets/image_and_animation/guard_idle.json");
-  heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet_v2.png")
+  heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet.png")
   heroWalkData = loadJSON("assets/image_and_animation/guard_walk.json")
   
 }
@@ -111,18 +112,22 @@ function display() {
 
 // find P,A,T,H,t,h in the array
 //if guard is within the PATH and presses up or w to goes to next room
-//if guard is within the th and presses down or s, goes to next room, 
+//if guard is within the th and presses down or s, goes to next room
 function roomChange(){
 
 }
 
 function heroTravel() {
   if (herostill) {
-    image(guardAnimation[frameCount % guardAnimation.length], x + 3, 123);
+    image(guardAnimation[frameCount % guardAnimation.length], x + 3, y);
   }
 
   if (!herostill){
-    image(guardWalkAnimation[frameCount % guardWalkAnimation.length], x, 123);
+    image(guardWalkAnimation[frameCount % guardWalkAnimation.length], x, y);
+  }
+
+  if (keyIsDown(87) || keyIsDown(UP_ARROW)) {
+
   }
 
   //faces the wrong way
