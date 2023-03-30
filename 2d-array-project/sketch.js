@@ -3,12 +3,11 @@
 // 23/03/2023
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond
+// created an a walking and idle animation for the guard using a character sheet and a JSON file
 
 //how to animate my spritesheet animations
 //https://www.youtube.com/watch?v=3noMeuufLZY
 
-// the animation works just have to fing how to display it right
 
 let x = 0;
 let guardAnimation = [];
