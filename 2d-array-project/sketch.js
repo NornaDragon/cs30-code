@@ -8,6 +8,8 @@
 //how to animate my spritesheet animations
 //https://www.youtube.com/watch?v=3noMeuufLZY
 
+// the animation works just have to fing how to display it right
+
 let x = 0
 let guardAnimation = [];
 
@@ -82,8 +84,9 @@ function setup() {
 }
 
 function draw() {
-  display();
-  heroTravel();
+  // display();
+  image(guardAnimation[frameCount % guardAnimation.length], x, 0);
+  // heroTravel();
 }
 
 function display() {
@@ -98,7 +101,7 @@ function display() {
 
 function heroTravel() {
   if (herostill) {
-    image(guardAnimation[frameCount % guardAnimation.length], x, 0);
+    
   }
   // if (!herostill) {
   //   image(heroIdleUp, x, height - (height/2), tileWidth, tileHeight);
@@ -110,15 +113,6 @@ function heroTravel() {
     x -= 5;
   }
 
-}
-
-function heroIdleAnimation() {
-  let guardFrames = heroIdleData
-  for (i = 0; i < guardFrames.length; i++) {
-    let pos = guardFrames[i].position;
-    let img = heroIdleImage.get(pos.x, pos.y, pos.w, pos.h);
-    guardAnimation.push(img);
-  }
 }
 
 function showTile(location, x, y) {
