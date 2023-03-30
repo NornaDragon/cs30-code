@@ -10,7 +10,7 @@
 
 // the animation works just have to fing how to display it right
 
-let x = 0
+let x = 0;
 let guardAnimation = [];
 let guardWalkAnimation = [];
 
@@ -38,15 +38,15 @@ function preload() {
   //load tile images
   brick = loadImage("assets/image_and_animation/brick_v2.png");
   dirt = loadImage("assets/image_and_animation/dirt_v2.png");
-  owen = loadImage("assets/image_and_animation/brick_Owen.png");
+  owen = loadImage("assets/image_and_animation/brick_Owen_v2.png");
 
-  pathwayLeft = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_0.png");
-  pathwayRight = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_1.png");
+  pathwayLeft = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_v2_0.png");
+  pathwayRight = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_v2_1.png");
 
-  pathwayTopLeft = loadImage("assets/image_and_animation/pathway/pathway_0.png");
-  pathwayTopRight = loadImage("assets/image_and_animation/pathway/pathway_1.png");
-  pathwayBottomLeft = loadImage("assets/image_and_animation/pathway/pathway_2.png");
-  pathwayBottomRight = loadImage("assets/image_and_animation/pathway/pathway_3.png");
+  pathwayTopLeft = loadImage("assets/image_and_animation/pathway/pathway_v2_0.png");
+  pathwayTopRight = loadImage("assets/image_and_animation/pathway/pathway_v2_1.png");
+  pathwayBottomLeft = loadImage("assets/image_and_animation/pathway/pathway_v2_2.png");
+  pathwayBottomRight = loadImage("assets/image_and_animation/pathway/pathway_v2_3.png");
 
   empty = loadImage("assets/image_and_animation/empty.png");
 
@@ -108,24 +108,38 @@ function display() {
   }
 }
 
+
+// find P,A,T,H,t,h in the array
+//if guard is within the PATH and presses up or w to goes to next room
+//if guard is within the th and presses down or s, goes to next room, 
+function roomChange(){
+
+}
+
 function heroTravel() {
   if (herostill) {
-    image(guardAnimation[frameCount % guardAnimation.length], x, 120);
+    image(guardAnimation[frameCount % guardAnimation.length], x + 3, 123);
   }
 
   if (!herostill){
-    image(guardWalkAnimation[frameCount % guardAnimation.length], x, 120);
+    image(guardWalkAnimation[frameCount % guardWalkAnimation.length], x, 123);
   }
 
+  //faces the wrong way
   if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) { //d
-    x += 5;
+    if (x < width-54) {
+     x += 4.4; 
+    }
     herostill = false;
   }
   else {
     herostill = true
   }
+  // looks good
   if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) { //a
-    x -= 5;
+    if (x > -6) {
+      x -= 4.4;
+    }
     herostill = false;
   }
 }
