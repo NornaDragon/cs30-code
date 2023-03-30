@@ -19,6 +19,7 @@ let levelBackground;
 let brick, dirt, empty, owen;
 let pathwayTopLeft, pathwayTopRight, pathwayBottomLeft, pathwayBottomRight;
 let pathwayLeft, pathwayRight;
+let heroIdleImage, heroIdleData, heroWalkImage, heroWalkData;
 let tilesHigh, tilesWide;
 let tileWidth, tileHeight;
 let levelToLoad;
@@ -53,8 +54,8 @@ function preload() {
   //hero animations
   heroIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
   heroIdleData = loadJSON("assets/image_and_animation/guard_idle.json");
-  heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet_v2.png")
-  heroWalkData = loadJSON("assets/image_and_animation/guard_walk.json")
+  heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet_v2.png");
+  heroWalkData = loadJSON("assets/image_and_animation/guard_walk.json");
   
 }
 
@@ -62,15 +63,15 @@ function setup() {
   // keep 5:1 ratio
   createCanvas(1200, 240);
   //240
-  let guardFrames = heroIdleData.frames
-  for (i = 0; i < guardFrames.length; i++) {
+  let guardFrames = heroIdleData.frames;
+  for (let i = 0; i < guardFrames.length; i++) {
     let pos = guardFrames[i].position;
     let img = heroIdleImage.get(pos.x, pos.y, pos.w, pos.h);
     guardAnimation.push(img);
   }
 
-  let guardWalkFrames = heroWalkData.frames
-  for (i = 0; i < guardWalkFrames.length; i++) {
+  let guardWalkFrames = heroWalkData.frames;
+  for (let i = 0; i < guardWalkFrames.length; i++) {
     let pos = guardWalkFrames[i].position;
     let img = heroWalkImage.get(pos.x, pos.y, pos.w, pos.h);
     guardWalkAnimation.push(img);
@@ -128,12 +129,12 @@ function heroTravel() {
   //faces the wrong way
   if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) { //d
     if (x < width-54) {
-     x += 4.4; 
+      x += 4.4; 
     }
     herostill = false;
   }
   else {
-    herostill = true
+    herostill = true;
   }
   // looks good
   if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) { //a
