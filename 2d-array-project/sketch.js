@@ -3,31 +3,19 @@
 // 23/03/2023
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - describe what you did to take this project "above and beyond
 
+//how to animate my spritesheet animations
+//https://www.youtube.com/watch?v=3noMeuufLZY
 
-// get a good way to import my animation (guard, angi, fire, grem)
-// make and get tiles ~
-// create damage and attack systems (menu system?)
-
-// if i can get all that
-// equipable items
-// more frendly and monster verients
-// customization
-
-// dist(x1, y1, x2, y2)
-// map(value, start1, stop1, start2, stop2, [withinBounds])
-// offset 
-
-//starting point
-let x = 0;
+let x = 0
+let guardAnimation = [];
 
 let tiles;
 let levelBackground;
 let brick, dirt, empty, owen;
 let pathwayTopLeft, pathwayTopRight, pathwayBottomLeft, pathwayBottomRight;
 let pathwayLeft, pathwayRight;
-let heroIdleUp, heroIdleDown;
 let tilesHigh, tilesWide;
 let tileWidth, tileHeight;
 let levelToLoad;
@@ -60,14 +48,21 @@ function preload() {
   empty = loadImage("assets/image_and_animation/empty.png");
 
   //hero animations
-  heroIdleUp = loadImage("assets/image_and_animation/guard_idle/pixil-frame-0.png");
-  heroIdleDown = loadImage("assets/image_and_animation/guard_idle/pixil-frame-1.png");
+  heroIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
+  heroIdleData = loadJSON("assets/image_and_animation/guard_idle.json");
   
 }
 
 function setup() {
   // keep 5:1 ratio
   createCanvas(1500, 300);
+
+  let guardFrames = heroIdleData.frames
+  for (i = 0; i < guardFrames.length; i++) {
+    let pos = guardFrames[i].position;
+    let img = heroIdleImage.get(pos.x, pos.y, pos.w, pos.h);
+    guardAnimation.push(img);
+  }
 
   tilesHigh = lines.length;
   tilesWide = lines[0].length;
@@ -102,16 +97,8 @@ function display() {
 }
 
 function heroTravel() {
-
-
   if (herostill) {
-    if (isUp && frameCount % 10 === 0){
-      image(heroIdleUp, x, height - height/2, tileWidth, tileHeight);
-      isUp = !isUp
-    }
-    else if (!isUp) {
-      image(heroIdleUp, x, height - height/2, tileWidth, tileHeight);
-    }
+    image(guardAnimation[frameCount % guardAnimation.length], x, 0);
   }
   // if (!herostill) {
   //   image(heroIdleUp, x, height - (height/2), tileWidth, tileHeight);
@@ -123,6 +110,15 @@ function heroTravel() {
     x -= 5;
   }
 
+}
+
+function heroIdleAnimation() {
+  let guardFrames = heroIdleData
+  for (i = 0; i < guardFrames.length; i++) {
+    let pos = guardFrames[i].position;
+    let img = heroIdleImage.get(pos.x, pos.y, pos.w, pos.h);
+    guardAnimation.push(img);
+  }
 }
 
 function showTile(location, x, y) {
