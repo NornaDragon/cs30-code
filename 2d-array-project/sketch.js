@@ -12,7 +12,10 @@
 let x = 0;
 let y = 123;
 let guardAnimation = [];
+let guardRightAnimation = [];
 let guardWalkAnimation = [];
+let guardRightWalkAnimation = [];
+
 
 let tiles;
 let levelBackground;
@@ -31,7 +34,7 @@ let isRight = false;
 
 function preload() {
   //load level data
-  levelToLoad = "assets/levels/0.txt";
+  levelToLoad = "assets/levels/3.txt";
   lines = loadStrings(levelToLoad);
 
   //load background
@@ -52,11 +55,14 @@ function preload() {
 
   empty = loadImage("assets/image_and_animation/empty.png");
 
-  //hero animations
-  heroIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
-  heroIdleData = loadJSON("assets/image_and_animation/guard_idle.json");
+  // 24 frames for 60 x 60 characters
+  Assets24fps_60x60 = loadJSON("assets/image_and_animation/24fps_60x60.json")
+
+  //hero Sprite Sheets
+  heroIdleImage = loadImage("assets/image_and_animation/long_guard_idle_sprite_sheet.png");
+  heroRightIdleImage = loadImage("assets/image_and_animation/right_long_guard_idle_sprite_sheet.png");
   heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet.png")
-  heroWalkData = loadJSON("assets/image_and_animation/guard_walk.json")
+  heroRightWalkImage = loadImage("assets/image_and_animation/right_guard_walk_sprite_sheet.png")
   
 }
 
@@ -64,18 +70,32 @@ function setup() {
   // keep 5:1 ratio
   createCanvas(1200, 240);
   //240
-  let guardFrames = heroIdleData.frames;
+  let guardFrames = Assets24fps_60x60.frames;
   for (let i = 0; i < guardFrames.length; i++) {
     let pos = guardFrames[i].position;
     let img = heroIdleImage.get(pos.x, pos.y, pos.w, pos.h);
     guardAnimation.push(img);
   }
 
-  let guardWalkFrames = heroWalkData.frames;
+  let guardRightFrames = Assets24fps_60x60.frames;
+  for (let i = 0; i < guardRightFrames.length; i++) {
+    let pos = guardRightFrames[i].position;
+    let img = heroRightIdleImage.get(pos.x, pos.y, pos.w, pos.h);
+    guardRightAnimation.push(img);
+  }
+
+  let guardWalkFrames = Assets24fps_60x60.frames;
   for (let i = 0; i < guardWalkFrames.length; i++) {
     let pos = guardWalkFrames[i].position;
     let img = heroWalkImage.get(pos.x, pos.y, pos.w, pos.h);
     guardWalkAnimation.push(img);
+  }
+
+  let guardRightWalkFrames = Assets24fps_60x60.frames;
+  for (let i = 0; i < guardRightWalkFrames.length; i++) {
+    let pos = guardRightWalkFrames[i].position;
+    let img = heroRightWalkImage.get(pos.x, pos.y, pos.w, pos.h);
+    guardRightWalkAnimation.push(img);
   }
 
   tilesHigh = lines.length;
@@ -126,28 +146,23 @@ function roomChange() {
 
 function heroTravel() {
   if (herostill) {
-    image(guardAnimation[frameCount % guardAnimation.length], x + 3, y);
+    if (isRight) {
+      image(guardRightAnimation[frameCount % guardRightAnimation.length], x + 3, y);
+    }
+    else {
+      image(guardAnimation[frameCount % guardAnimation.length], x + 3, y);
+    }
   }
 
   if (!herostill){
     if (isRight) {
-      //change the location to up there
-      for (let i = 0; i < guardWalkAnimation.length; i++) {
-        translate(guardWalkAnimation[i].w, 0);
-        scale(-1, 1);
-        image(guardWalkAnimation[frameCount % guardWalkAnimation.length], 60, y);
-      }
+      image(guardRightWalkAnimation[frameCount % guardRightWalkAnimation.length], x, y);
     }
     else {
       image(guardWalkAnimation[frameCount % guardWalkAnimation.length], x, y);
     }
   }
 
-  if (keyIsDown(87) || keyIsDown(UP_ARROW)) {
-
-  }
-
-  //faces the wrong way
   if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) { //d
     isRight = true
     if (x < width-54) {
@@ -155,9 +170,9 @@ function heroTravel() {
     }
     herostill = false;
   }
-  // else {
-  //   herostill = true;
-  // }
+  else {
+    herostill = true;
+  }
   // looks good
   if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) { //a
     isRight = false
