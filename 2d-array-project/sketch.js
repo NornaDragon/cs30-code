@@ -8,9 +8,11 @@
 //how to animate my spritesheet animations
 //https://www.youtube.com/watch?v=3noMeuufLZY
 
-
+//starting point for movement of the player character
 let x = 0;
 let y = 123;
+
+//arrays to hold the animations of all the states of all the characters
 let guardAnimation = [];
 let guardRightAnimation = [];
 let guardWalkAnimation = [];
@@ -41,18 +43,23 @@ function preload() {
   levelBackground = loadImage("assets/image_and_animation/aroace_background.png");
 
   //load tile images
+  // scenery tiles
   brick = loadImage("assets/image_and_animation/brick_v2.png");
   dirt = loadImage("assets/image_and_animation/dirt_v2.png");
   owen = loadImage("assets/image_and_animation/brick_Owen_v2.png");
 
+  //travel tiles
+  //foreground
   pathwayLeft = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_v2_0.png");
   pathwayRight = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_v2_1.png");
-
+  //background
   pathwayTopLeft = loadImage("assets/image_and_animation/pathway/pathway_v2_0.png");
   pathwayTopRight = loadImage("assets/image_and_animation/pathway/pathway_v2_1.png");
   pathwayBottomLeft = loadImage("assets/image_and_animation/pathway/pathway_v2_2.png");
   pathwayBottomRight = loadImage("assets/image_and_animation/pathway/pathway_v2_3.png");
 
+
+  //null tile
   empty = loadImage("assets/image_and_animation/empty.png");
 
   // 24 frames for 60 x 60 characters
@@ -69,7 +76,8 @@ function preload() {
 function setup() {
   // keep 5:1 ratio
   createCanvas(1200, 240);
-  //240
+
+  // splting the sprite sheet into 24 images then putting them into an array
   let guardFrames = Assets24fps_60x60.frames;
   for (let i = 0; i < guardFrames.length; i++) {
     let pos = guardFrames[i].position;
@@ -98,6 +106,7 @@ function setup() {
     guardRightWalkAnimation.push(img);
   }
 
+  // making the scelitin of the canvas
   tilesHigh = lines.length;
   tilesWide = lines[0].length;
 
@@ -106,7 +115,7 @@ function setup() {
 
   tiles = createEmpty2dArray(tilesWide, tilesHigh);
 
-  //put values into 2d array of characters
+
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
       let tileType = lines[y][x];
@@ -163,7 +172,7 @@ function heroTravel() {
     }
   }
 
-  if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) { //d
+  if (keyIsDown(RIGHT_ARROW)) {
     isRight = true
     if (x < width-54) {
       x += 4.4;
@@ -173,17 +182,13 @@ function heroTravel() {
   else {
     herostill = true;
   }
-  // looks good
-  if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) { //a
+  if (keyIsDown(LEFT_ARROW)) {
     isRight = false
     if (x > -6) {
       x -= 4.4;
     }
     herostill = false;
   }
-  // else {
-  //   herostill = true;
-  // }
 }
 
 function showTile(location, x, y) {
