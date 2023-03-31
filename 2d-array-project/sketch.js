@@ -27,10 +27,11 @@ let lines;
 
 let herostill = true;
 let isUp = true;
+let isRight = false;
 
 function preload() {
   //load level data
-  levelToLoad = "assets/levels/3.txt";
+  levelToLoad = "assets/levels/0.txt";
   lines = loadStrings(levelToLoad);
 
   //load background
@@ -129,7 +130,17 @@ function heroTravel() {
   }
 
   if (!herostill){
-    image(guardWalkAnimation[frameCount % guardWalkAnimation.length], x, y);
+    if (isRight) {
+      //change the location to up there
+      for (let i = 0; i < guardWalkAnimation.length; i++) {
+        translate(guardWalkAnimation[i].w, 0);
+        scale(-1, 1);
+        image(guardWalkAnimation[frameCount % guardWalkAnimation.length], 60, y);
+      }
+    }
+    else {
+      image(guardWalkAnimation[frameCount % guardWalkAnimation.length], x, y);
+    }
   }
 
   if (keyIsDown(87) || keyIsDown(UP_ARROW)) {
@@ -138,21 +149,26 @@ function heroTravel() {
 
   //faces the wrong way
   if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) { //d
+    isRight = true
     if (x < width-54) {
-      x += 4.4; 
+      x += 4.4;
     }
     herostill = false;
   }
-  else {
-    herostill = true;
-  }
+  // else {
+  //   herostill = true;
+  // }
   // looks good
   if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) { //a
+    isRight = false
     if (x > -6) {
       x -= 4.4;
     }
     herostill = false;
   }
+  // else {
+  //   herostill = true;
+  // }
 }
 
 function showTile(location, x, y) {
