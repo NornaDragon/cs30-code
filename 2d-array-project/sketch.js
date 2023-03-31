@@ -5,18 +5,23 @@
 // Extra for Experts:
 // created an a walking and idle animation for the guard using a character sheet and a JSON file
 
-//how to animate my spritesheet animations
-//https://www.youtube.com/watch?v=3noMeuufLZY
+// how to animate my spritesheet animations
+// https://www.youtube.com/watch?v=3noMeuufLZY
 
-//starting point for movement of the player character
+// starting point for movement of the player character
 let x = 0;
 let y = 123;
 
-//arrays to hold the animations of all the states of all the characters
+// arrays to hold the animations of all the states of all the characters
+
+// guard idle left and right
 let guardAnimation = [];
 let guardRightAnimation = [];
+// guard walk left and right
 let guardWalkAnimation = [];
 let guardRightWalkAnimation = [];
+// grem idle left
+let gremAnimation = [];
 
 
 let tiles;
@@ -35,41 +40,45 @@ let isUp = true;
 let isRight = false;
 
 function preload() {
-  //load level data
+  // load level data
   levelToLoad = "assets/levels/3.txt";
   lines = loadStrings(levelToLoad);
 
-  //load background
+  // load background
   levelBackground = loadImage("assets/image_and_animation/aroace_background.png");
 
-  //load tile images
+  // load tile images
+
   // scenery tiles
-  brick = loadImage("assets/image_and_animation/brick_v2.png");
-  dirt = loadImage("assets/image_and_animation/dirt_v2.png");
-  owen = loadImage("assets/image_and_animation/brick_Owen_v2.png");
+  brick = loadImage("assets/image_and_animation/brick.png");
+  dirt = loadImage("assets/image_and_animation/dirt.png");
+  owen = loadImage("assets/image_and_animation/brick_Owen.png");
 
-  //travel tiles
-  //foreground
-  pathwayLeft = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_v2_0.png");
-  pathwayRight = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_v2_1.png");
-  //background
-  pathwayTopLeft = loadImage("assets/image_and_animation/pathway/pathway_v2_0.png");
-  pathwayTopRight = loadImage("assets/image_and_animation/pathway/pathway_v2_1.png");
-  pathwayBottomLeft = loadImage("assets/image_and_animation/pathway/pathway_v2_2.png");
-  pathwayBottomRight = loadImage("assets/image_and_animation/pathway/pathway_v2_3.png");
-
+  // foreground travel tiles
+  pathwayLeft = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_0.png");
+  pathwayRight = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_1.png");
+  // background travel tiles
+  pathwayTopLeft = loadImage("assets/image_and_animation/pathway/pathway_0.png");
+  pathwayTopRight = loadImage("assets/image_and_animation/pathway/pathway_1.png");
+  pathwayBottomLeft = loadImage("assets/image_and_animation/pathway/pathway_2.png");
+  pathwayBottomRight = loadImage("assets/image_and_animation/pathway/pathway_3.png");
 
   //null tile
   empty = loadImage("assets/image_and_animation/empty.png");
+
+  // All Animation Assets
 
   // 24 frames for 60 x 60 characters
   Assets24fps_60x60 = loadJSON("assets/image_and_animation/24fps_60x60.json")
 
   //hero Sprite Sheets
-  heroIdleImage = loadImage("assets/image_and_animation/long_guard_idle_sprite_sheet.png");
-  heroRightIdleImage = loadImage("assets/image_and_animation/right_long_guard_idle_sprite_sheet.png");
+  heroIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
+  heroRightIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
   heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet.png")
-  heroRightWalkImage = loadImage("assets/image_and_animation/right_guard_walk_sprite_sheet.png")
+  heroRightWalkImage = loadImage("assets/image_and_animation/guard_walk_right_sprite_sheet.png")
+
+  // Grem Sprite Sheet
+  gremIdleImage = loadImage("assets/image_and_animation/grem_idle_sprite_sheet.png");
   
 }
 
@@ -106,6 +115,13 @@ function setup() {
     guardRightWalkAnimation.push(img);
   }
 
+  let gremIdleFrames = Assets24fps_60x60.frames;
+  for (let i = 0; i < gremIdleFrames.length; i++) {
+    let pos = gremIdleFrames[i].position;
+    let img = gremIdleImage.get(pos.x, pos.y, pos.w, pos.h);
+    gremAnimation.push(img);
+  }
+
   // making the scelitin of the canvas
   tilesHigh = lines.length;
   tilesWide = lines[0].length;
@@ -127,6 +143,7 @@ function setup() {
 function draw() {
   display();
   heroTravel();
+  gremEnemy();
 }
 
 function display() {
@@ -189,6 +206,10 @@ function heroTravel() {
     }
     herostill = false;
   }
+}
+
+function gremEnemy() {
+  image(gremAnimation[frameCount % gremAnimation.length], 1140, y)
 }
 
 function showTile(location, x, y) {
