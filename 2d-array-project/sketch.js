@@ -9,8 +9,8 @@
 // https://www.youtube.com/watch?v=3noMeuufLZY
 
 // starting point for movement of the player character
-let x = 0;
-let y = 123;
+let moveX = 0;
+let moveY = 123;
 
 // arrays to hold the animations of all the states of all the characters
 
@@ -26,10 +26,17 @@ let gremAnimation = [];
 
 let tiles;
 let levelBackground;
+
+// stationary blocks
 let brick, dirt, empty, owen;
 let pathwayTopLeft, pathwayTopRight, pathwayBottomLeft, pathwayBottomRight;
 let pathwayLeft, pathwayRight;
-let heroIdleImage, heroIdleData, heroWalkImage, heroWalkData;
+
+let Assets24fps_60x60;
+
+let heroIdleImage, heroRightIdleImage, heroWalkImage, heroRightWalkImage;
+let gremIdleImage;
+
 let tilesHigh, tilesWide;
 let tileWidth, tileHeight;
 let levelToLoad;
@@ -42,6 +49,8 @@ let isRight = false;
 function preload() {
   // load level data
   levelToLoad = "assets/levels/3.txt";
+
+  //*
   lines = loadStrings(levelToLoad);
 
   // load background
@@ -69,13 +78,13 @@ function preload() {
   // All Animation Assets
 
   // 24 frames for 60 x 60 characters
-  Assets24fps_60x60 = loadJSON("assets/image_and_animation/24fps_60x60.json")
+  Assets24fps_60x60 = loadJSON("assets/image_and_animation/24fps_60x60.json");
 
   //hero Sprite Sheets
   heroIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
   heroRightIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
-  heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet.png")
-  heroRightWalkImage = loadImage("assets/image_and_animation/guard_walk_right_sprite_sheet.png")
+  heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet.png");
+  heroRightWalkImage = loadImage("assets/image_and_animation/guard_walk_right_sprite_sheet.png");
 
   // Grem Sprite Sheet
   gremIdleImage = loadImage("assets/image_and_animation/grem_idle_sprite_sheet.png");
@@ -144,6 +153,7 @@ function draw() {
   display();
   heroTravel();
   gremEnemy();
+  roomChange();
 }
 
 function display() {
@@ -163,8 +173,8 @@ function display() {
 function roomChange() {
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
-      if (tiles[y][x] === 'P', 'A', 'T', 'H', 't', 'h'){
-        
+      if (tiles[y][x] === "T" && tiles[y][x] === tiles[y][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+        let lol = 0;
       }
     }
   }
@@ -173,26 +183,26 @@ function roomChange() {
 function heroTravel() {
   if (herostill) {
     if (isRight) {
-      image(guardRightAnimation[frameCount % guardRightAnimation.length], x + 3, y);
+      image(guardRightAnimation[frameCount % guardRightAnimation.length], moveX + 3, moveY);
     }
     else {
-      image(guardAnimation[frameCount % guardAnimation.length], x + 3, y);
+      image(guardAnimation[frameCount % guardAnimation.length], moveX + 3, moveY);
     }
   }
 
   if (!herostill){
     if (isRight) {
-      image(guardRightWalkAnimation[frameCount % guardRightWalkAnimation.length], x, y);
+      image(guardRightWalkAnimation[frameCount % guardRightWalkAnimation.length], moveX, moveY);
     }
     else {
-      image(guardWalkAnimation[frameCount % guardWalkAnimation.length], x, y);
+      image(guardWalkAnimation[frameCount % guardWalkAnimation.length], moveX, moveY);
     }
   }
 
   if (keyIsDown(RIGHT_ARROW)) {
-    isRight = true
-    if (x < width-54) {
-      x += 4.4;
+    isRight = true;
+    if (moveX < width-54) {
+      moveX += 4.4;
     }
     herostill = false;
   }
@@ -200,16 +210,16 @@ function heroTravel() {
     herostill = true;
   }
   if (keyIsDown(LEFT_ARROW)) {
-    isRight = false
-    if (x > -6) {
-      x -= 4.4;
+    isRight = false;
+    if (moveX > -6) {
+      moveX -= 4.4;
     }
     herostill = false;
   }
 }
 
 function gremEnemy() {
-  image(gremAnimation[frameCount % gremAnimation.length], 1140, y + 3)
+  image(gremAnimation[frameCount % gremAnimation.length], 1140, moveY + 3);
 }
 
 function showTile(location, x, y) {
