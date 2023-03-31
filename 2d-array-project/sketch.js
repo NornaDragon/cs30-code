@@ -209,7 +209,7 @@ function heroTravel() {
 }
 
 function gremEnemy() {
-  image(gremAnimation[frameCount % gremAnimation.length], 1140, y)
+  image(gremAnimation[frameCount % gremAnimation.length], 1140, y + 3)
 }
 
 function showTile(location, x, y) {
