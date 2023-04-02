@@ -47,7 +47,12 @@ let isUp = true;
 let isRight = false;
 
 function preload() {
+  dungeon1 = "assets/levels/0.txt"
+  dungeon2 = "assets/levels/1.txt"
+  dungeon3 = "assets/levels/2.txt"
+  dungeon4 = "assets/levels/3.txt"
   // load level data
+  
   levelToLoad = "assets/levels/3.txt";
 
   //*
