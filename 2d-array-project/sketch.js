@@ -34,7 +34,7 @@ let pathwayLeft, pathwayRight;
 
 let Assets24fps_60x60;
 
-let heroIdleImage, heroRightIdleImage, heroWalkImage, heroRightWalkImage;
+let heroIdleImage, heroRightIdleImage,heroFrontIdleImage, heroBackIdleImage, heroWalkImage, heroRightWalkImage;
 let gremIdleImage;
 
 let tilesHigh, tilesWide;
@@ -43,9 +43,14 @@ let dungeon1, dungeon2, dungeon3, dungeon4;
 let levelToLoad;
 let lines;
 
+//derection check
 let herostill = true;
 let isUp = true;
 let isRight = false;
+
+//level check
+let level = 0;
+let levelSet;
 
 function preload() {
   dungeon1 = "assets/levels/0.txt";
@@ -89,6 +94,8 @@ function preload() {
   //hero Sprite Sheets
   heroIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
   heroRightIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
+  heroFrontIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
+  heroBackIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
   heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet.png");
   heroRightWalkImage = loadImage("assets/image_and_animation/guard_walk_right_sprite_sheet.png");
 
@@ -162,6 +169,21 @@ function draw() {
   roomChange();
 }
 
+function levelLoader() {
+  if (level === 0) {
+    levelSet = "assets/levels/0.txt";
+  }
+  else if (level === 1) {
+    levelSet = "assets/levels/1.txt";
+  }
+  else if (level === 2) {
+    levelSet = "assets/levels/2.txt";
+  }
+  else if (level === 3) {
+    levelSet = "assets/levels/3.txt";
+  }
+}
+
 function display() {
   image(levelBackground, 0, 0, width, height);
 
@@ -221,6 +243,10 @@ function heroTravel() {
       moveX -= 4.4;
     }
     herostill = false;
+  }
+
+  if (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) {
+    herostill = true;
   }
 }
 
