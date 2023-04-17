@@ -19,6 +19,9 @@
 - [Game of Life](game-of-life)
 - [Sudoku](sudoku)
 
+### OOP
+- [Walker Man](walker-OOP)
+
 ## Projects
 - [Arrays and Object Notation Project (Minesweeper)](arraysproject)
 - [2D Array Project (The Monster Dungeon)](2d-array-project)
