@@ -1,5 +1,11 @@
 // OOP fireworks
 
+class Spark {
+  constructor() {
+    
+  }
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
