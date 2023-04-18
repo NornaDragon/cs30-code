@@ -21,6 +21,7 @@
 
 ### OOP
 - [Walker Man](walker-OOP)
+- [Fireworks](fireworks)
 
 ## Projects
 - [Arrays and Object Notation Project (Minesweeper)](arraysproject)
