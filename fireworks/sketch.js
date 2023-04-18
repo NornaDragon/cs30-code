@@ -1,8 +1,12 @@
 // OOP fireworks
 
 class Spark {
-  constructor() {
-    
+  constructor(x, y, dx, dy, colour) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy =dy;
+    this.colour = colour;
   }
 }
 
