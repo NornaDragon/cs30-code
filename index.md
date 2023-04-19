@@ -22,12 +22,8 @@
 ### OOP
 - [Walker Man](walker-OOP)
 - [Fireworks](fireworks)
+- [Balling](ball-array)
 
 ## Projects
 - [Arrays and Object Notation Project (Minesweeper)](arraysproject)
 - [2D Array Project (The Monster Dungeon)](2d-array-project)
-
-# Q
-## Q
-### Q
-#### Q
