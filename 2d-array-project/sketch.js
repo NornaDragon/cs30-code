@@ -41,6 +41,7 @@ let Assets24fps_60x60;
 let heroIdleImage, heroRightIdleImage,heroFrontIdleImage, heroBackIdleImage, heroWalkImage, heroRightWalkImage;
 let gremIdleImage;
 
+//level logic
 let tilesHigh, tilesWide;
 let tileWidth, tileHeight;
 let lines;
@@ -59,7 +60,12 @@ function preload() {
   levelSet.push(loadStrings("assets/levels/0.txt"));
   levelSet.push(loadStrings("assets/levels/1.txt"));
   levelSet.push(loadStrings("assets/levels/2.txt"));
-  levelSet.push(loadStrings("assets/levels/3.txt"));  
+  levelSet.push(loadStrings("assets/levels/3.txt"));
+  levelSet.push(loadStrings("assets/levels/4.txt"));
+  levelSet.push(loadStrings("assets/levels/5.txt"));
+  levelSet.push(loadStrings("assets/levels/6.txt"));
+  levelSet.push(loadStrings("assets/levels/7.txt"));
+  levelSet.push(loadStrings("assets/levels/8.txt"));  
 
   // load background
   levelBackground = loadImage("assets/image_and_animation/aroace_background.png");
@@ -175,7 +181,7 @@ function levelLoader() {
 
 function display() {
   image(levelBackground, 0, 0, width, height);
-
+  //creating tiles for the images to 'sit' on (repeating)
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
       let tileType = lines[y][x];
@@ -197,11 +203,11 @@ function display() {
 function roomChange() {
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
-      if (tiles[y][x] === "P" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+      if (tiles[y][x] === "P" && tiles[y][x] === tiles[1][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
         level++;
         levelLoader();
       }
-      else if (tiles[y][x] === "A" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+      else if (tiles[y][x] === "A" && tiles[y][x] === tiles[1][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
         level++;
         levelLoader();
       }
@@ -214,11 +220,11 @@ function roomChange() {
         levelLoader();
       }
       else if (tiles[y][x] === "t" && tiles[y][x] === tiles[3][Math.floor(moveX/60)] && keyIsDown(DOWN_ARROW)){
-        level++;
+        level--;
         levelLoader();
       }
       else if (tiles[y][x] === "h" && tiles[y][x] === tiles[3][Math.floor(moveX/60)] && keyIsDown(DOWN_ARROW)){
-        level++;
+        level--;
         levelLoader();
       }
     
