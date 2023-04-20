@@ -55,6 +55,10 @@ let isRight = false;
 let level = 0;
 let levelSet = [];
 
+//room change check + a stopper to make that it doesn't go to fast
+let isChanged = false;
+let wait = 0;
+
 function preload() {
   // load level data
   levelSet.push(loadStrings("assets/levels/0.txt"));
@@ -204,30 +208,50 @@ function display() {
 function roomChange() {
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
-      if (tiles[y][x] === "P" && tiles[y][x] === tiles[1][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
-        level++;
-        levelLoader();
+      if (isChanged === false) {
+        if (tiles[y][x] === "P" && tiles[y][x] === tiles[1][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+          level++;
+          levelLoader();
+          isChanged = true;
+        }
+        else if (tiles[y][x] === "A" && tiles[y][x] === tiles[1][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+          level++;
+          levelLoader();
+          isChanged = true;
+        }
+        else if (tiles[y][x] === "T" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+          level++;
+          levelLoader();
+          isChanged = true;
+        }
+        else if (tiles[y][x] === "H" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+          level++;
+          levelLoader();
+          isChanged = true;
+        }
+        else if (tiles[y][x] === "t" && tiles[y][x] === tiles[3][Math.floor(moveX/60)] && keyIsDown(DOWN_ARROW)){
+          level--;
+          levelLoader();
+          isChanged = true;
+        }
+        else if (tiles[y][x] === "h" && tiles[y][x] === tiles[3][Math.floor(moveX/60)] && keyIsDown(DOWN_ARROW)){
+          level--;
+          levelLoader();
+          isChanged = true;
+        }
       }
-      else if (tiles[y][x] === "A" && tiles[y][x] === tiles[1][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
-        level++;
-        levelLoader();
+      else {
+        if (wait === 100) {
+          isChanged = false;
+          wait = 0;
+        }
+        else {
+          wait++;
+        }
       }
-      else if (tiles[y][x] === "T" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
-        level++;
-        levelLoader();
-      }
-      else if (tiles[y][x] === "H" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
-        level++;
-        levelLoader();
-      }
-      else if (tiles[y][x] === "t" && tiles[y][x] === tiles[3][Math.floor(moveX/60)] && keyIsDown(DOWN_ARROW)){
-        level--;
-        levelLoader();
-      }
-      else if (tiles[y][x] === "h" && tiles[y][x] === tiles[3][Math.floor(moveX/60)] && keyIsDown(DOWN_ARROW)){
-        level--;
-        levelLoader();
-      }
+      
+
+      
     
     }
   }
@@ -277,7 +301,9 @@ function heroTravel() {
 }
 
 function gremEnemy() {
-  image(gremAnimation[frameCount % gremAnimation.length], 1140, moveY + 3);
+  if (level === 0 || level === 8) {
+    image(gremAnimation[frameCount % gremAnimation.length], 1140, moveY + 3);
+  }
 }
 
 // putting images on to the tiles
