@@ -34,7 +34,11 @@ let brick, dirt, empty, owen;
 let pathwayTopLeft, pathwayTopRight, pathwayBottomLeft, pathwayBottomRight;
 let pathwayLeft, pathwayRight;
 
-//base animation guide for all charcters
+// Map
+
+let map0, map1, map2, map3, map4, map5, map6, map7, map8
+
+// Base animation guide for all charcters
 let Assets24fps_60x60;
 
 //Animation sprite sheets
@@ -72,15 +76,26 @@ function preload() {
   levelSet.push(loadStrings("assets/levels/8.txt"));  
 
   // load background
-  levelBackground = loadImage("assets/image_and_animation/aroace_background.png");
+  levelBackground = loadImage("assets/image_and_animation/scenery/aroace_background.png");
 
 
   // load tile images
 
+  // map
+  map0 = loadImage("assets/image_and_animation/map/map0.png");
+  map1 = loadImage("assets/image_and_animation/map/map1.png");
+  map2 = loadImage("assets/image_and_animation/map/map2.png");
+  map3 = loadImage("assets/image_and_animation/map/map3.png");
+  map4 = loadImage("assets/image_and_animation/map/map4.png");
+  map5 = loadImage("assets/image_and_animation/map/map5.png");
+  map6 = loadImage("assets/image_and_animation/map/map6.png");
+  map7 = loadImage("assets/image_and_animation/map/map7.png");
+  map8 = loadImage("assets/image_and_animation/map/map8.png");
+
   // scenery tiles
-  brick = loadImage("assets/image_and_animation/brick.png");
-  dirt = loadImage("assets/image_and_animation/dirt.png");
-  owen = loadImage("assets/image_and_animation/brick_Owen.png");
+  brick = loadImage("assets/image_and_animation/scenery/brick.png");
+  dirt = loadImage("assets/image_and_animation/scenery/dirt.png");
+  owen = loadImage("assets/image_and_animation/scenery/brick_Owen.png");
 
   // foreground travel tiles
   pathwayLeft = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_0.png");
@@ -92,23 +107,23 @@ function preload() {
   pathwayBottomRight = loadImage("assets/image_and_animation/pathway/pathway_3.png");
 
   //null tile
-  empty = loadImage("assets/image_and_animation/empty.png");
+  empty = loadImage("assets/image_and_animation/scenery/empty.png");
 
   // All Animation Assets
 
   // 24 frames for 60 x 60 characters
-  Assets24fps_60x60 = loadJSON("assets/image_and_animation/24fps_60x60.json");
+  Assets24fps_60x60 = loadJSON("assets/image_and_animation/animation/24fps_60x60.json");
 
   //guard Sprite Sheets
-  guardIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
-  guardRightIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
-  guardFrontIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
-  guardBackIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
-  guardWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet.png");
-  guardRightWalkImage = loadImage("assets/image_and_animation/guard_walk_right_sprite_sheet.png");
+  guardIdleImage = loadImage("assets/image_and_animation/animation/guard_idle_sprite_sheet.png");
+  guardRightIdleImage = loadImage("assets/image_and_animation/animation/guard_idle_right_sprite_sheet.png");
+  guardFrontIdleImage = loadImage("assets/image_and_animation/animation/guard_idle_right_sprite_sheet.png");
+  guardBackIdleImage = loadImage("assets/image_and_animation/animation/guard_idle_right_sprite_sheet.png");
+  guardWalkImage = loadImage("assets/image_and_animation/animation/guard_walk_sprite_sheet.png");
+  guardRightWalkImage = loadImage("assets/image_and_animation/animation/guard_walk_right_sprite_sheet.png");
 
   // Grem Sprite Sheet
-  gremIdleImage = loadImage("assets/image_and_animation/grem_idle_sprite_sheet.png");
+  gremIdleImage = loadImage("assets/image_and_animation/animation/grem_idle_sprite_sheet.png");
   
 }
 
@@ -332,6 +347,33 @@ function showTile(location, x, y) {
   }
   else if (location === "O") {
     image(owen, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "0") {
+    image(map0, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "1") {
+    image(map1, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "2") {
+    image(map2, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "3") {
+    image(map3, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "4") {
+    image(map4, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "5") {
+    image(map5, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "6") {
+    image(map6, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "7") {
+    image(map7, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+  }
+  else if (location === "8") {
+    image(map8, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
   }
   else {
     image(empty, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
