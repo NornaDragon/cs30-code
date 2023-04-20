@@ -8,6 +8,8 @@
 // how to animate my spritesheet animations
 // https://www.youtube.com/watch?v=3noMeuufLZY
 
+// based some of my levelloader code off of ethan sparrow 2D array project
+
 // starting point for movement of the player character
 let moveX = 0;
 let moveY = 123;
@@ -142,7 +144,7 @@ function setup() {
     gremAnimation.push(img);
   }
 
-  // making the scelitin of the canvas
+  //creating tiles for the images to 'sit' on
   tilesHigh = lines.length;
   tilesWide = lines[0].length;
 
