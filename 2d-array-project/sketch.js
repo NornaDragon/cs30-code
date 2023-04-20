@@ -215,37 +215,38 @@ function display() {
 // If the guard is within the th and presses down it goes to next room
 // 'wait' used as a sortof 'sleep' function
 // 'isChange' used with 'wait' to stop the rooms from changing to fast
+// Math.floor((moveX+30)/60) moveX+30 gets where on the canvas the guard is, /60 get it close to the array number, and floor gets it the last bit 
 
 function roomChange() {
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
       if (isChanged === false) {
-        if (tiles[y][x] === "P" && tiles[y][x] === tiles[1][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+        if (tiles[y][x] === "P" && tiles[y][x] === tiles[1][Math.floor((moveX+30)/60)] && keyIsDown(UP_ARROW)){
           level++;
           levelLoader();
           isChanged = true;
         }
-        else if (tiles[y][x] === "A" && tiles[y][x] === tiles[1][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+        else if (tiles[y][x] === "A" && tiles[y][x] === tiles[1][Math.floor((moveX+30)/60)] && keyIsDown(UP_ARROW)){
           level++;
           levelLoader();
           isChanged = true;
         }
-        else if (tiles[y][x] === "T" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+        else if (tiles[y][x] === "T" && tiles[y][x] === tiles[2][Math.floor((moveX+30)/60)] && keyIsDown(UP_ARROW)){
           level++;
           levelLoader();
           isChanged = true;
         }
-        else if (tiles[y][x] === "H" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+        else if (tiles[y][x] === "H" && tiles[y][x] === tiles[2][Math.floor((moveX+30)/60)] && keyIsDown(UP_ARROW)){
           level++;
           levelLoader();
           isChanged = true;
         }
-        else if (tiles[y][x] === "t" && tiles[y][x] === tiles[3][Math.floor(moveX/60)] && keyIsDown(DOWN_ARROW)){
+        else if (tiles[y][x] === "t" && tiles[y][x] === tiles[3][Math.floor((moveX+30)/60)] && keyIsDown(DOWN_ARROW)){
           level--;
           levelLoader();
           isChanged = true;
         }
-        else if (tiles[y][x] === "h" && tiles[y][x] === tiles[3][Math.floor(moveX/60)] && keyIsDown(DOWN_ARROW)){
+        else if (tiles[y][x] === "h" && tiles[y][x] === tiles[3][Math.floor((moveX+30)/60)] && keyIsDown(DOWN_ARROW)){
           level--;
           levelLoader();
           isChanged = true;
@@ -282,7 +283,7 @@ function guardTravel() {
       image(guardWalkAnimation[frameCount % guardWalkAnimation.length], moveX, moveY);
     }
   }
-  
+
   if (keyIsDown(RIGHT_ARROW)) {
     isRight = true;
     if (moveX < width-54) {
