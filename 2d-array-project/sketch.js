@@ -3,9 +3,9 @@
 // 23/03/2023
 //
 // Extra for Experts:
-// created an a walking and idle animation for the guard using a character sheet and a JSON file
+// created a walking and idle animation for the guard using a character sheet and a JSON file
 
-// how to animate my spritesheet animations
+// how to animate my sprite sheet animations
 // https://www.youtube.com/watch?v=3noMeuufLZY
 
 // based some of my levelloader code off of ethan sparrow 2D array project
@@ -38,7 +38,7 @@ let pathwayLeft, pathwayRight;
 let Assets24fps_60x60;
 
 //Animation sprite sheets
-let heroIdleImage, heroRightIdleImage,heroFrontIdleImage, heroBackIdleImage, heroWalkImage, heroRightWalkImage;
+let guardIdleImage, guardRightIdleImage,guardFrontIdleImage, guardBackIdleImage, guardWalkImage, guardRightWalkImage;
 let gremIdleImage;
 
 //level logic
@@ -46,8 +46,8 @@ let tilesHigh, tilesWide;
 let tileWidth, tileHeight;
 let lines;
 
-//derection check
-let herostill = true;
+//direction check
+let guardstill = true;
 let isUp = true;
 let isRight = false;
 
@@ -99,13 +99,13 @@ function preload() {
   // 24 frames for 60 x 60 characters
   Assets24fps_60x60 = loadJSON("assets/image_and_animation/24fps_60x60.json");
 
-  //hero Sprite Sheets
-  heroIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
-  heroRightIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
-  heroFrontIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
-  heroBackIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
-  heroWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet.png");
-  heroRightWalkImage = loadImage("assets/image_and_animation/guard_walk_right_sprite_sheet.png");
+  //guard Sprite Sheets
+  guardIdleImage = loadImage("assets/image_and_animation/guard_idle_sprite_sheet.png");
+  guardRightIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
+  guardFrontIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
+  guardBackIdleImage = loadImage("assets/image_and_animation/guard_idle_right_sprite_sheet.png");
+  guardWalkImage = loadImage("assets/image_and_animation/guard_walk_sprite_sheet.png");
+  guardRightWalkImage = loadImage("assets/image_and_animation/guard_walk_right_sprite_sheet.png");
 
   // Grem Sprite Sheet
   gremIdleImage = loadImage("assets/image_and_animation/grem_idle_sprite_sheet.png");
@@ -118,32 +118,32 @@ function setup() {
   levelLoader();
 
 
-  // splting the sprite sheet into 24 images then putting them into an array
+  // splicing the sprite sheet into 24 images then putting them into an array
   let guardFrames = Assets24fps_60x60.frames;
   for (let i = 0; i < guardFrames.length; i++) {
     let pos = guardFrames[i].position;
-    let img = heroIdleImage.get(pos.x, pos.y, pos.w, pos.h);
+    let img = guardIdleImage.get(pos.x, pos.y, pos.w, pos.h);
     guardAnimation.push(img);
   }
 
   let guardRightFrames = Assets24fps_60x60.frames;
   for (let i = 0; i < guardRightFrames.length; i++) {
     let pos = guardRightFrames[i].position;
-    let img = heroRightIdleImage.get(pos.x, pos.y, pos.w, pos.h);
+    let img = guardRightIdleImage.get(pos.x, pos.y, pos.w, pos.h);
     guardRightAnimation.push(img);
   }
 
   let guardWalkFrames = Assets24fps_60x60.frames;
   for (let i = 0; i < guardWalkFrames.length; i++) {
     let pos = guardWalkFrames[i].position;
-    let img = heroWalkImage.get(pos.x, pos.y, pos.w, pos.h);
+    let img = guardWalkImage.get(pos.x, pos.y, pos.w, pos.h);
     guardWalkAnimation.push(img);
   }
 
   let guardRightWalkFrames = Assets24fps_60x60.frames;
   for (let i = 0; i < guardRightWalkFrames.length; i++) {
     let pos = guardRightWalkFrames[i].position;
-    let img = heroRightWalkImage.get(pos.x, pos.y, pos.w, pos.h);
+    let img = guardRightWalkImage.get(pos.x, pos.y, pos.w, pos.h);
     guardRightWalkAnimation.push(img);
   }
 
@@ -174,7 +174,7 @@ function setup() {
 
 function draw() {
   display();
-  heroTravel();
+  guardTravel();
   gremEnemy();
   roomChange();
 }
@@ -201,10 +201,11 @@ function display() {
 }
 
 
-//if guard is within the PATH and presses up or w to goes to next room
-//if guard is within the th and presses down or s, goes to next room
+// If the guard is within the PATH and presses up it goes to next room
+// If the guard is within the th and presses down it goes to next room
+// wait used as a sortof 'sleep' function
+// isChange used with wait to stop the rooms changing to fast
 
-// fix it going to fast
 function roomChange() {
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
@@ -249,17 +250,13 @@ function roomChange() {
           wait++;
         }
       }
-      
-
-      
-    
     }
   }
 }
 
-// movement and changing based on derection and wether their in movement
-function heroTravel() {
-  if (herostill) {
+// Movement and changing image based on direction and whether their in movement
+function guardTravel() {
+  if (guardstill) {
     if (isRight) {
       image(guardRightAnimation[frameCount % guardRightAnimation.length], moveX + 3, moveY);
     }
@@ -268,7 +265,7 @@ function heroTravel() {
     }
   }
 
-  if (!herostill){
+  if (!guardstill){
     if (isRight) {
       image(guardRightWalkAnimation[frameCount % guardRightWalkAnimation.length], moveX, moveY);
     }
@@ -282,31 +279,32 @@ function heroTravel() {
     if (moveX < width-54) {
       moveX += 4.4;
     }
-    herostill = false;
+    guardstill = false;
   }
   else {
-    herostill = true;
+    guardstill = true;
   }
   if (keyIsDown(LEFT_ARROW)) {
     isRight = false;
     if (moveX > -6) {
       moveX -= 4.4;
     }
-    herostill = false;
+    guardstill = false;
   }
 
   if (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) {
-    herostill = true;
+    guardstill = true;
   }
 }
 
+// Used to show first and last level and used to make sure animation works on different images
 function gremEnemy() {
   if (level === 0 || level === 8) {
     image(gremAnimation[frameCount % gremAnimation.length], 1140, moveY + 3);
   }
 }
 
-// putting images on to the tiles
+// Putting images on to the tiles
 function showTile(location, x, y) {
   if (location === "D") {
     image(dirt, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
