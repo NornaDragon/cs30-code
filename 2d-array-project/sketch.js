@@ -35,7 +35,7 @@ let pathwayTopLeft, pathwayTopRight, pathwayBottomLeft, pathwayBottomRight;
 let pathwayLeft, pathwayRight;
 
 // Map for each room
-let map0, map1, map2, map3, map4, map5, map6, map7, map8
+let map0, map1, map2, map3, map4, map5, map6, map7, map8;
 
 // Base animation guide for all charcters
 let Assets24fps_60x60;
@@ -190,7 +190,7 @@ function draw() {
 }
 
 function levelLoader() {
-  lines = levelSet[level]
+  lines = levelSet[level];
 }
 
 function display() {
