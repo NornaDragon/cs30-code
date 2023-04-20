@@ -32,15 +32,15 @@ let brick, dirt, empty, owen;
 let pathwayTopLeft, pathwayTopRight, pathwayBottomLeft, pathwayBottomRight;
 let pathwayLeft, pathwayRight;
 
+//base animation guide for all charcters
 let Assets24fps_60x60;
 
+//Animation sprite sheets
 let heroIdleImage, heroRightIdleImage,heroFrontIdleImage, heroBackIdleImage, heroWalkImage, heroRightWalkImage;
 let gremIdleImage;
 
 let tilesHigh, tilesWide;
 let tileWidth, tileHeight;
-let dungeon1, dungeon2, dungeon3, dungeon4;
-let levelToLoad;
 let lines;
 
 //derection check
@@ -50,22 +50,18 @@ let isRight = false;
 
 //level check
 let level = 0;
-let levelSet;
+let levelSet = [];
 
 function preload() {
-  dungeon1 = "assets/levels/0.txt";
-  dungeon2 = "assets/levels/1.txt";
-  dungeon3 = "assets/levels/2.txt";
-  dungeon4 = "assets/levels/3.txt";
   // load level data
-  
-  levelToLoad = "assets/levels/3.txt";
-
-  //*
-  lines = loadStrings(levelToLoad);
+  levelSet.push(loadStrings("assets/levels/0.txt"));
+  levelSet.push(loadStrings("assets/levels/1.txt"));
+  levelSet.push(loadStrings("assets/levels/2.txt"));
+  levelSet.push(loadStrings("assets/levels/3.txt"));  
 
   // load background
   levelBackground = loadImage("assets/image_and_animation/aroace_background.png");
+
 
   // load tile images
 
@@ -107,6 +103,8 @@ function preload() {
 function setup() {
   // keep 5:1 ratio
   createCanvas(1200, 240);
+  levelLoader();
+
 
   // splting the sprite sheet into 24 images then putting them into an array
   let guardFrames = Assets24fps_60x60.frames;
@@ -170,22 +168,18 @@ function draw() {
 }
 
 function levelLoader() {
-  if (level === 0) {
-    levelSet = "assets/levels/0.txt";
-  }
-  else if (level === 1) {
-    levelSet = "assets/levels/1.txt";
-  }
-  else if (level === 2) {
-    levelSet = "assets/levels/2.txt";
-  }
-  else if (level === 3) {
-    levelSet = "assets/levels/3.txt";
-  }
+  lines = levelSet[level]
 }
 
 function display() {
   image(levelBackground, 0, 0, width, height);
+
+  for (let y = 0; y < tilesHigh; y++) {
+    for (let x = 0; x < tilesWide; x++) {
+      let tileType = lines[y][x];
+      tiles[y][x] = tileType;
+    }
+  }
 
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
@@ -201,13 +195,36 @@ function display() {
 function roomChange() {
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
-      if (tiles[y][x] === "T" && tiles[y][x] === tiles[y][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
-        let lol = 0;
+      if (tiles[y][x] === "P" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+        level++;
+        levelLoader();
       }
+      else if (tiles[y][x] === "A" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+        level++;
+        levelLoader();
+      }
+      else if (tiles[y][x] === "T" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+        level++;
+        levelLoader();
+      }
+      else if (tiles[y][x] === "H" && tiles[y][x] === tiles[2][Math.floor(moveX/60)] && keyIsDown(UP_ARROW)){
+        level++;
+        levelLoader();
+      }
+      else if (tiles[y][x] === "t" && tiles[y][x] === tiles[3][Math.floor(moveX/60)] && keyIsDown(DOWN_ARROW)){
+        level++;
+        levelLoader();
+      }
+      else if (tiles[y][x] === "h" && tiles[y][x] === tiles[3][Math.floor(moveX/60)] && keyIsDown(DOWN_ARROW)){
+        level++;
+        levelLoader();
+      }
+    
     }
   }
 }
 
+// movement and changing based on derection and wether their in movement
 function heroTravel() {
   if (herostill) {
     if (isRight) {
@@ -254,6 +271,7 @@ function gremEnemy() {
   image(gremAnimation[frameCount % gremAnimation.length], 1140, moveY + 3);
 }
 
+// putting images on to the tiles
 function showTile(location, x, y) {
   if (location === "D") {
     image(dirt, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
@@ -288,12 +306,12 @@ function showTile(location, x, y) {
 }
 
 function createEmpty2dArray(cols, rows) {
-  let randomGrid = [];
+  let emptyGrid = [];
   for (let y = 0; y < rows; y++) {
-    randomGrid.push([]);
+    emptyGrid.push([]);
     for (let x = 0; x < cols; x++) {
-      randomGrid[y].push(0);
+      emptyGrid[y].push(0);
     }
   }
-  return randomGrid;
+  return emptyGrid;
 }
