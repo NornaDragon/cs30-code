@@ -197,9 +197,10 @@ function display() {
 }
 
 
-// find P,A,T,H,t,h in the array
 //if guard is within the PATH and presses up or w to goes to next room
 //if guard is within the th and presses down or s, goes to next room
+
+// fix it going to fast
 function roomChange() {
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
