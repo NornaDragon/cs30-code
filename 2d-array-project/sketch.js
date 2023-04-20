@@ -3,68 +3,67 @@
 // 23/03/2023
 //
 // Extra for Experts:
-// created a walking and idle animation for the guard using a character sheet and a JSON file
+// Created a walking and idle animation for the guard using a character sheet and a JSON file
 
-// how to animate my sprite sheet animations
+// How to animate my sprite sheet animations
 // https://www.youtube.com/watch?v=3noMeuufLZY
 
-// based some of my levelloader code off of ethan sparrow 2D array project
+// I based some of my levelloader code off of ethan sparrow 2D array project
 
-// starting point for movement of the player character
+// Starting point for the movement of the player character
 let moveX = 0;
 let moveY = 123;
 
-// arrays to hold the animations of all the states of all the characters
+// Arrays to hold the animations of all the states of all the characters
 
-// guard idle left and right
+// Guard idle left and right
 let guardAnimation = [];
 let guardRightAnimation = [];
-// guard walk left and right
+// Guard walk left and right
 let guardWalkAnimation = [];
 let guardRightWalkAnimation = [];
-// grem idle left
+// Grem idle left
 let gremAnimation = [];
 
 
 let tiles;
 let levelBackground;
 
-// stationary blocks
+// Stationary blocks
 let brick, dirt, empty, owen;
 let pathwayTopLeft, pathwayTopRight, pathwayBottomLeft, pathwayBottomRight;
 let pathwayLeft, pathwayRight;
 
-// Map
-
+// Map for each room
 let map0, map1, map2, map3, map4, map5, map6, map7, map8
 
 // Base animation guide for all charcters
 let Assets24fps_60x60;
 
-//Animation sprite sheets
+// Animation sprite sheets
 let guardIdleImage, guardRightIdleImage,guardFrontIdleImage, guardBackIdleImage, guardWalkImage, guardRightWalkImage;
 let gremIdleImage;
 
-//level logic
+// Level logic
 let tilesHigh, tilesWide;
 let tileWidth, tileHeight;
 let lines;
 
-//direction check
+// Direction check
 let guardstill = true;
 let isUp = true;
 let isRight = false;
 
-//level check
+// Level check
 let level = 0;
 let levelSet = [];
 
-//room change check + a stopper to make that it doesn't go to fast
+// Room change check + a stopper to make that it doesn't go to fast
 let isChanged = false;
 let wait = 0;
 
 function preload() {
-  // load level data
+  // Load level data
   levelSet.push(loadStrings("assets/levels/0.txt"));
   levelSet.push(loadStrings("assets/levels/1.txt"));
   levelSet.push(loadStrings("assets/levels/2.txt"));
@@ -75,13 +74,12 @@ function preload() {
   levelSet.push(loadStrings("assets/levels/7.txt"));
   levelSet.push(loadStrings("assets/levels/8.txt"));  
 
-  // load background
+  // Load background
   levelBackground = loadImage("assets/image_and_animation/scenery/aroace_background.png");
 
+  // Load tile images
 
-  // load tile images
-
-  // map
+  // Map
   map0 = loadImage("assets/image_and_animation/map/map0.png");
   map1 = loadImage("assets/image_and_animation/map/map1.png");
   map2 = loadImage("assets/image_and_animation/map/map2.png");
@@ -92,21 +90,21 @@ function preload() {
   map7 = loadImage("assets/image_and_animation/map/map7.png");
   map8 = loadImage("assets/image_and_animation/map/map8.png");
 
-  // scenery tiles
+  // Scenery tiles
   brick = loadImage("assets/image_and_animation/scenery/brick.png");
   dirt = loadImage("assets/image_and_animation/scenery/dirt.png");
   owen = loadImage("assets/image_and_animation/scenery/brick_Owen.png");
 
-  // foreground travel tiles
+  // Foreground travel tiles
   pathwayLeft = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_0.png");
   pathwayRight = loadImage("assets/image_and_animation/ground_pathway/ground_pathway_1.png");
-  // background travel tiles
+  // Background travel tiles
   pathwayTopLeft = loadImage("assets/image_and_animation/pathway/pathway_0.png");
   pathwayTopRight = loadImage("assets/image_and_animation/pathway/pathway_1.png");
   pathwayBottomLeft = loadImage("assets/image_and_animation/pathway/pathway_2.png");
   pathwayBottomRight = loadImage("assets/image_and_animation/pathway/pathway_3.png");
 
-  //null tile
+  // Null tile
   empty = loadImage("assets/image_and_animation/scenery/empty.png");
 
   // All Animation Assets
@@ -114,7 +112,7 @@ function preload() {
   // 24 frames for 60 x 60 characters
   Assets24fps_60x60 = loadJSON("assets/image_and_animation/animation/24fps_60x60.json");
 
-  //guard Sprite Sheets
+  // Guard Sprite Sheets
   guardIdleImage = loadImage("assets/image_and_animation/animation/guard_idle_sprite_sheet.png");
   guardRightIdleImage = loadImage("assets/image_and_animation/animation/guard_idle_right_sprite_sheet.png");
   guardFrontIdleImage = loadImage("assets/image_and_animation/animation/guard_idle_right_sprite_sheet.png");
@@ -124,16 +122,14 @@ function preload() {
 
   // Grem Sprite Sheet
   gremIdleImage = loadImage("assets/image_and_animation/animation/grem_idle_sprite_sheet.png");
-  
 }
 
 function setup() {
-  // keep 5:1 ratio
+  // Keep 5:1 ratio
   createCanvas(1200, 240);
   levelLoader();
 
-
-  // splicing the sprite sheet into 24 images then putting them into an array
+  // Splicing the sprite sheet into 24 images then putting them into an array
   let guardFrames = Assets24fps_60x60.frames;
   for (let i = 0; i < guardFrames.length; i++) {
     let pos = guardFrames[i].position;
@@ -169,7 +165,7 @@ function setup() {
     gremAnimation.push(img);
   }
 
-  //creating tiles for the images to 'sit' on
+  // Creating tiles for the images to 'sit' on
   tilesHigh = lines.length;
   tilesWide = lines[0].length;
 
@@ -177,7 +173,6 @@ function setup() {
   tileHeight = height / tilesHigh;
 
   tiles = createEmpty2dArray(tilesWide, tilesHigh);
-
 
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
@@ -200,7 +195,7 @@ function levelLoader() {
 
 function display() {
   image(levelBackground, 0, 0, width, height);
-  //creating tiles for the images to 'sit' on (repeating)
+  // Creating tiles for the images to 'sit' on (repeating)
   for (let y = 0; y < tilesHigh; y++) {
     for (let x = 0; x < tilesWide; x++) {
       let tileType = lines[y][x];
@@ -218,8 +213,8 @@ function display() {
 
 // If the guard is within the PATH and presses up it goes to next room
 // If the guard is within the th and presses down it goes to next room
-// wait used as a sortof 'sleep' function
-// isChange used with wait to stop the rooms changing to fast
+// 'wait' used as a sortof 'sleep' function
+// 'isChange' used with 'wait' to stop the rooms from changing to fast
 
 function roomChange() {
   for (let y = 0; y < tilesHigh; y++) {
@@ -279,8 +274,7 @@ function guardTravel() {
       image(guardAnimation[frameCount % guardAnimation.length], moveX + 3, moveY);
     }
   }
-
-  if (!guardstill){
+  else {
     if (isRight) {
       image(guardRightWalkAnimation[frameCount % guardRightWalkAnimation.length], moveX, moveY);
     }
@@ -288,7 +282,7 @@ function guardTravel() {
       image(guardWalkAnimation[frameCount % guardWalkAnimation.length], moveX, moveY);
     }
   }
-
+  
   if (keyIsDown(RIGHT_ARROW)) {
     isRight = true;
     if (moveX < width-54) {
@@ -306,7 +300,6 @@ function guardTravel() {
     }
     guardstill = false;
   }
-
   if (keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) {
     guardstill = true;
   }
