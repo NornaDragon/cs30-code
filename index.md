@@ -24,6 +24,8 @@
 - [Fireworks](fireworks)
 - [Balling](ball-array)
 
+## Others
+- [Using Timers](timers)
 ## Projects
 - [Arrays and Object Notation Project (Minesweeper)](arraysproject)
 - [2D Array Project (The Monster Dungeon)](2d-array-project)
