@@ -10,7 +10,7 @@ function setup() {
 
 function draw() {
   background(220);
-  if (frameCount%10 === 0) {
+  if (frameCount%60 === 0) {
     if (theDepth < 9) {
       theDepth++;
     }

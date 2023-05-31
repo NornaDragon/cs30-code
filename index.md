@@ -26,6 +26,7 @@
 
 ## recution
 - [fractal circles](fractal-circles)
+- [Sierpinski Triangle](sierpinski-triangle)
 
 ## Others
 - [Using Timers](timers)
